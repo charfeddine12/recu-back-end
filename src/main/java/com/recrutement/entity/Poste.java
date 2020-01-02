@@ -8,6 +8,10 @@ import javax.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+@Entity
+@Table
 public class Poste implements Serializable{
 
 	/**
@@ -24,6 +28,9 @@ public class Poste implements Serializable{
 	private Date dateAjout;
 	@UpdateTimestamp
 	private Date dateModif;
+	@ManyToOne
+	@JsonManagedReference
+	private Offre offre;
 	public Poste() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -66,11 +73,16 @@ public class Poste implements Serializable{
 	public void setDateModif(Date dateModif) {
 		this.dateModif = dateModif;
 	}
+	public Offre getOffre() {
+		return offre;
+	}
+	public void setOffre(Offre offre) {
+		this.offre = offre;
+	}
 	@Override
 	public String toString() {
 		return "Poste [id=" + id + ", intitule=" + intitule + ", description=" + description + ", dateAjout="
-				+ dateAjout + ", dateModif=" + dateModif + "]";
+				+ dateAjout + ", dateModif=" + dateModif + ", offre=" + offre + "]";
 	}
-	
 	
 }

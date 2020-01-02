@@ -3,14 +3,18 @@ package com.recrutement.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-public class Exeperience implements Serializable{
+@Entity
+@Table
+public class Experience implements Serializable{
 
 	/**
 	 * 
@@ -29,11 +33,11 @@ public class Exeperience implements Serializable{
 	private Date dateAjout;
 	@UpdateTimestamp
 	private Date dateModif;
-	public Exeperience() {
+	public Experience() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Exeperience(Long id, Date debut, Date fin, String titre, String employeur, String lieu, String description,
+	public Experience(Long id, Date debut, Date fin, String titre, String employeur, String lieu, String description,
 			Date dateAjout, Date dateModif) {
 		super();
 		this.id = id;

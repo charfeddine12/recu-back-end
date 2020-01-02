@@ -2,12 +2,14 @@ package com.recrutement.entity;
 
 import java.io.File;
 import java.util.Date;
+import java.util.List;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 
+@Entity
+@Table
+@Inheritance( strategy = InheritanceType.TABLE_PER_CLASS )
 public class Employeur extends Utilisateur {
 	/**
 	 * 
@@ -26,6 +28,8 @@ public class Employeur extends Utilisateur {
 	private String fondation;
 	private File photo;
 	private String pays;
+	@OneToMany
+	List<Offre> offres;
 	public Employeur() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -47,6 +51,22 @@ public class Employeur extends Utilisateur {
 		this.fondation = fondation;
 		this.photo = photo;
 		this.pays = pays;
+	}
+	
+	public Employeur(Long id, String nom, String presentation, String site, String adresse, String taille, String type,
+			String fondation, File photo, String pays, List<Offre> offres) {
+		super();
+		this.id = id;
+		this.nom = nom;
+		this.presentation = presentation;
+		this.site = site;
+		this.adresse = adresse;
+		this.taille = taille;
+		this.type = type;
+		this.fondation = fondation;
+		this.photo = photo;
+		this.pays = pays;
+		this.offres = offres;
 	}
 	public Long getId() {
 		return id;

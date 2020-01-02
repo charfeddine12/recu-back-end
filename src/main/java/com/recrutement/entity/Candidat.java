@@ -1,41 +1,65 @@
 package com.recrutement.entity;
 
-import java.io.File;
 import java.util.Date;
+import java.util.List;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
+import javax.persistence.*;
+@Entity
+@Table
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Candidat extends Utilisateur {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+
+	@Column
 	private String nom;
+	@Column
 	private String prenom;
-	private File photo;
+	@Column
+	private String photo;
+	@Column
 	private Date dateNaissance;
+	@Column
 	private String diplome;
-	private File piece_jointe;
+	@Column
+	private String piece_jointe;
+	@Column
 	private String tel;
+	@Column
 	private String titre;
+	@Column
 	private String adresse;
+	@Column
 	private String nationalite;
+	@OneToMany
+	List<Formation> formations;
+
+	@OneToMany
+	List<Competence> competences;
+
+	@OneToMany
+	List<Experience> experiences;
+	
+	@OneToMany
+	List<Langue> langues;
+	
+	@ManyToMany
+	@JoinTable(
+	  name = "Candidature", 
+	  joinColumns = @JoinColumn(name = "candidat_id"), 
+	  inverseJoinColumns = @JoinColumn(name = "offre_id"))
+	List<Offre> offres;
 	
 	public Candidat() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Candidat(Long id, String nom, String prenom, File photo, Date dateNaissance, String diplome,
-			File piece_jointe, String tel, String titre, String adresse, String nationalite) {
+	public Candidat(String nom, String prenom, String photo, Date dateNaissance, String diplome, String piece_jointe,
+			String tel, String titre, String adresse, String nationalite) {
 		super();
-		this.id = id;
 		this.nom = nom;
 		this.prenom = prenom;
 		this.photo = photo;
@@ -48,12 +72,48 @@ public class Candidat extends Utilisateur {
 		this.nationalite = nationalite;
 	}
 
-	public Long getId() {
-		return id;
+	
+
+	public Candidat(String nom, String prenom, String photo, Date dateNaissance, String diplome, String piece_jointe,
+			String tel, String titre, String adresse, String nationalite, List<Formation> formations,
+			List<Competence> competences, List<Experience> experiences, List<Langue> langues) {
+		super();
+		this.nom = nom;
+		this.prenom = prenom;
+		this.photo = photo;
+		this.dateNaissance = dateNaissance;
+		this.diplome = diplome;
+		this.piece_jointe = piece_jointe;
+		this.tel = tel;
+		this.titre = titre;
+		this.adresse = adresse;
+		this.nationalite = nationalite;
+		this.formations = formations;
+		this.competences = competences;
+		this.experiences = experiences;
+		this.langues = langues;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	
+	public Candidat(String nom, String prenom, String photo, Date dateNaissance, String diplome, String piece_jointe,
+			String tel, String titre, String adresse, String nationalite, List<Formation> formations,
+			List<Competence> competences, List<Experience> experiences, List<Langue> langues, List<Offre> offres) {
+		super();
+		this.nom = nom;
+		this.prenom = prenom;
+		this.photo = photo;
+		this.dateNaissance = dateNaissance;
+		this.diplome = diplome;
+		this.piece_jointe = piece_jointe;
+		this.tel = tel;
+		this.titre = titre;
+		this.adresse = adresse;
+		this.nationalite = nationalite;
+		this.formations = formations;
+		this.competences = competences;
+		this.experiences = experiences;
+		this.langues = langues;
+		this.offres = offres;
 	}
 
 	public String getNom() {
@@ -72,11 +132,11 @@ public class Candidat extends Utilisateur {
 		this.prenom = prenom;
 	}
 
-	public File getPhoto() {
+	public String getPhoto() {
 		return photo;
 	}
 
-	public void setPhoto(File photo) {
+	public void setPhoto(String photo) {
 		this.photo = photo;
 	}
 
@@ -96,11 +156,11 @@ public class Candidat extends Utilisateur {
 		this.diplome = diplome;
 	}
 
-	public File getPiece_jointe() {
+	public String getPiece_jointe() {
 		return piece_jointe;
 	}
 
-	public void setPiece_jointe(File piece_jointe) {
+	public void setPiece_jointe(String piece_jointe) {
 		this.piece_jointe = piece_jointe;
 	}
 
@@ -136,12 +196,55 @@ public class Candidat extends Utilisateur {
 		this.nationalite = nationalite;
 	}
 
+	
+	public List<Formation> getFormations() {
+		return formations;
+	}
+
+	public void setFormations(List<Formation> formations) {
+		this.formations = formations;
+	}
+
+	public List<Competence> getCompetences() {
+		return competences;
+	}
+
+	public void setCompetences(List<Competence> competences) {
+		this.competences = competences;
+	}
+
+	public List<Experience> getExperiences() {
+		return experiences;
+	}
+
+	public void setExperiences(List<Experience> experiences) {
+		this.experiences = experiences;
+	}
+
+	
+	public List<Langue> getLangues() {
+		return langues;
+	}
+
+	public void setLangues(List<Langue> langues) {
+		this.langues = langues;
+	}
+
+	public List<Offre> getOffres() {
+		return offres;
+	}
+
+	public void setOffres(List<Offre> offres) {
+		this.offres = offres;
+	}
+
 	@Override
 	public String toString() {
-		return "Candidat [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", photo=" + photo + ", dateNaissance="
-				+ dateNaissance + ", diplome=" + diplome + ", piece_jointe=" + piece_jointe + ", tel=" + tel
-				+ ", titre=" + titre + ", adresse=" + adresse + ", nationalite=" + nationalite + "]";
+		return "Candidat [nom=" + nom + ", prenom=" + prenom + ", photo=" + photo + ", dateNaissance=" + dateNaissance
+				+ ", diplome=" + diplome + ", piece_jointe=" + piece_jointe + ", tel=" + tel + ", titre=" + titre
+				+ ", adresse=" + adresse + ", nationalite=" + nationalite + ", formations=" + formations
+				+ ", competences=" + competences + ", experiences=" + experiences + ", langues=" + langues + ", offres="
+				+ offres + "]";
 	}
-	
-	
+
 }
