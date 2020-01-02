@@ -3,6 +3,7 @@ package com.recrutement.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,14 +23,21 @@ public class Formation implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column
 	private Long id;
+	@Column
 	private Date debut;
+	@Column
 	private Date fin;
+	@Column
 	private String titre;
+	@Column
 	private String etablissement;
 	@CreationTimestamp
+	@Column
 	private Date dateAjout;
 	@UpdateTimestamp
+	@Column
 	private Date dateModif;
 	public Formation() {
 		super();

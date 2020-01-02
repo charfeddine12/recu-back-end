@@ -9,7 +9,7 @@ import javax.validation.constraints.Email;
 
 @Entity
 @Table
-@Inheritance( strategy = InheritanceType.TABLE_PER_CLASS )
+
 public class Employeur extends Utilisateur {
 	/**
 	 * 
@@ -18,15 +18,25 @@ public class Employeur extends Utilisateur {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column
 	private Long id;
+	@Column
 	private String nom;
+	@Column
 	private String presentation;
+	@Column
 	private String site;
+	@Column
 	private String adresse;
+	@Column
 	private String taille;
+	@Column
 	private String type;
+	@Column
 	private String fondation;
+	@Column
 	private File photo;
+	@Column
 	private String pays;
 	@OneToMany
 	List<Offre> offres;
@@ -35,7 +45,7 @@ public class Employeur extends Utilisateur {
 		// TODO Auto-generated constructor stub
 	}
 	public Employeur(Long id, Email email, Role role, Date dateAjout, Date dateModif) {
-		super(id, email, role, dateAjout, dateModif);
+		super();
 		// TODO Auto-generated constructor stub
 	}
 	public Employeur(Long id, String nom, String presentation, String site, String adresse, String taille, String type,

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,15 +30,23 @@ public class Offre implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column
 	private Long id;
+	@Column
 	private String niveauEtude;
+	@Column
 	private String fonction;
+	@Column
 	private String horaire;
+	@Column
 	private String salaire;
+	@Column
 	private String niveauExperience;
 	@CreationTimestamp
+	@Column
 	private Date dateAjout;
 	@UpdateTimestamp
+	@Column
 	private Date dateModif;
 	
 	@ManyToOne

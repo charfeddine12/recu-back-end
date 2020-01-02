@@ -3,10 +3,13 @@ package com.recrutement.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 
@@ -18,6 +21,8 @@ enum Role{
 }
 @Entity
 @Table
+@Inheritance( strategy = InheritanceType.TABLE_PER_CLASS )
+
 public class Utilisateur implements Serializable{
 
 	/**
@@ -26,18 +31,24 @@ public class Utilisateur implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column
 	private Long id;
-	private Email email;
+	@Column
+	@Email
+	private String email;
+	@Column
 	private Role role;
 	@CreationTimestamp
+	@Column
 	private Date dateAjout;
 	@UpdateTimestamp
+	@Column
 	private Date dateModif;
 	public Utilisateur() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Utilisateur(Long id, Email email, Role role, Date dateAjout, Date dateModif) {
+	public Utilisateur(Long id, String email, Role role, Date dateAjout, Date dateModif) {
 		super();
 		this.id = id;
 		this.email = email;
@@ -51,10 +62,10 @@ public class Utilisateur implements Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Email getEmail() {
+	public String getEmail() {
 		return email;
 	}
-	public void setEmail(Email email) {
+	public void setEmail(String email) {
 		this.email = email;
 	}
 	public Role getRole() {

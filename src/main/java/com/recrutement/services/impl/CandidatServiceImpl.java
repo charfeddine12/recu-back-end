@@ -2,33 +2,48 @@ package com.recrutement.services.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.recrutement.entity.Candidat;
+import com.recrutement.repository.CandidatRepositroy;
 import com.recrutement.services.CandidatService;
 
-public class CandidatServiceImpl implements CandidatService{
+@Service
+public class CandidatServiceImpl implements CandidatService {
+
+	@Autowired
+	CandidatRepositroy candidatRepository;
+
+	public CandidatServiceImpl(CandidatRepositroy candidatRepository) {
+		super();
+		this.candidatRepository = candidatRepository;
+	}
 
 	@Override
 	public List<Candidat> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return candidatRepository.findAll();
 	}
 
 	@Override
 	public Candidat getOne(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		if (id != null)
+			return candidatRepository.getOne(id);
+		return new Candidat();
 	}
 
 	@Override
 	public Candidat save(Candidat candidat) {
-		// TODO Auto-generated method stub
+		if (candidat != null)
+			return candidatRepository.save(candidat);
 		return null;
 	}
 
 	@Override
 	public void delete(Long id) {
-		// TODO Auto-generated method stub
-		
+		if (id != null)
+			candidatRepository.deleteById(id);
+
 	}
 
 }

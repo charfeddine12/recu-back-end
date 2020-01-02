@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,11 +27,15 @@ public class Domaine implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column
 	private Long id;
+	@Column
 	private String intitule;
 	@CreationTimestamp
+	@Column
 	private Date dateAjout;
 	@UpdateTimestamp
+	@Column
 	private Date dateModif;
 	
 	@OneToMany(mappedBy = "domaine")

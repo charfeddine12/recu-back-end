@@ -21,12 +21,18 @@ public class Poste implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column
 	private Long id;
+	@Column
 	private String intitule;
+	@Column
 	private String description;
+	
 	@CreationTimestamp
+	@Column
 	private Date dateAjout;
 	@UpdateTimestamp
+	@Column
 	private Date dateModif;
 	@ManyToOne
 	@JsonManagedReference
