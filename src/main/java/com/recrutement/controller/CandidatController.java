@@ -40,7 +40,7 @@ public class CandidatController {
 	}
 
 	@GetMapping("/get/{id}")
-	public Candidat getDomaine(@PathVariable Long id) {
+	public Candidat getCandidat(@PathVariable Long id) {
 		log.debug("REST request to get Candidat : {}", id);
 		Candidat candidat = null;
 		if (id != null)
@@ -49,7 +49,7 @@ public class CandidatController {
 	}
 
 	@DeleteMapping("/delete/{id}")
-	public boolean deleteDomaine(@PathVariable Long id) {
+	public boolean deleteCandidat(@PathVariable Long id) {
 		log.debug("REST request to delete candidat: {}", id);
 		boolean result = false;
 		if (id != null)
@@ -59,7 +59,7 @@ public class CandidatController {
 
 	@SuppressWarnings("static-access")
 	@PostMapping("/save")
-	public Candidat createDomaine(@RequestBody Candidat candidat) throws URISyntaxException {
+	public Candidat createCandidat(@RequestBody Candidat candidat) throws URISyntaxException {
 		log.debug("REST request to save candidat : {}", candidat);
 
 		if (candidat.getId() != null) {
