@@ -10,8 +10,12 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table
+//there are problem if we don't have this annotation  for the lazy loading via the hibernate proxy object. Got around it by annotating the class having lazy loaded private properties with
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Candidat extends Utilisateur {
 	/**
 	 * 

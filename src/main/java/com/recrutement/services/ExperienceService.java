@@ -9,5 +9,5 @@ public interface ExperienceService {
 	List<Experience> getAll();
 	Experience getOne(Long id);
 	Experience save(Experience experience);
-	void delete(Long id);
+	boolean delete(Long id);
 }

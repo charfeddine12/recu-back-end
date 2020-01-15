@@ -9,5 +9,5 @@ public interface FormationService {
 	List<Formation> getAll();
 	Formation getOne(Long id);
 	Formation save(Formation formation);
-	void delete(Long id);
+	boolean delete(Long id);
 }

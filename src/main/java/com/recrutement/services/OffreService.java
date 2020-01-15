@@ -9,5 +9,5 @@ public interface OffreService {
 	List<Offre> getAll();
 	Offre getOne(Long id);
 	Offre save(Offre offre);
-	void delete(Long id);
+	boolean delete(Long id);
 }

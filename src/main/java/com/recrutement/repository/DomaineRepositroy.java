@@ -1,7 +1,11 @@
 package com.recrutement.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface DomaineRepositroy extends JpaRepository<DomaineRepositroy, Long> {
+import com.recrutement.entity.Domaine;
+
+@Repository
+public interface DomaineRepositroy extends JpaRepository<Domaine, Long> {
 
 }

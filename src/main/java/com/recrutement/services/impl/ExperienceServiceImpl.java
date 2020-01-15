@@ -2,33 +2,49 @@ package com.recrutement.services.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.recrutement.entity.Experience;
+import com.recrutement.repository.ExperienceRepositroy;
 import com.recrutement.services.ExperienceService;
 
-public class ExperienceServiceImpl implements ExperienceService{
+public class ExperienceServiceImpl implements ExperienceService {
+
+	@Autowired
+	ExperienceRepositroy experienceRepository;
+
+	public ExperienceServiceImpl(ExperienceRepositroy experienceRepository) {
+		super();
+		this.experienceRepository = experienceRepository;
+	}
 
 	@Override
 	public List<Experience> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return experienceRepository.findAll();
 	}
 
 	@Override
 	public Experience getOne(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		if (id != null)
+			return experienceRepository.getOne(id);
+		return new Experience();
 	}
 
 	@Override
 	public Experience save(Experience experience) {
-		// TODO Auto-generated method stub
+		if (experience != null)
+			return experienceRepository.save(experience);
 		return null;
 	}
 
 	@Override
-	public void delete(Long id) {
-		// TODO Auto-generated method stub
-		
+	public boolean delete(Long id) {
+
+		if (id != null)
+			experienceRepository.deleteById(id);
+		if (experienceRepository.getOne(id) != null)
+			return false;
+		return true;
 	}
 
 }

@@ -1,7 +1,16 @@
 package com.recrutement.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
-public interface EmployeurRepositroy extends JpaRepository<EmployeurRepositroy, Long> {
+import com.recrutement.entity.Employeur;
+
+@Repository
+public interface EmployeurRepositroy extends JpaRepository<Employeur, Long> {
+
+	@Query("select employeur from Employeur employeur where employeur.email=:email")
+	Employeur findByEmail(@Param("email") String email);
 
 }

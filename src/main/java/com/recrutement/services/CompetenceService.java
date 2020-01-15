@@ -9,5 +9,5 @@ public interface CompetenceService {
 	List<Competence> getAll();
 	Competence getOne(Long id);
 	Competence save(Competence comptence);
-	void delete(Long id);
+	boolean delete(Long id);
 }

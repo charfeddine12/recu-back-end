@@ -9,5 +9,6 @@ public interface UtilisateurService {
 	List<Utilisateur> getAll();
 	Utilisateur getOne(Long id);
 	Utilisateur save(Utilisateur utilisateur);
-	void delete(Long id);
+	boolean delete(Long id);
+	boolean findOneByEmail(String email);
 }

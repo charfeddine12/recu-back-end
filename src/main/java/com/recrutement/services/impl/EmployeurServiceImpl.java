@@ -2,33 +2,48 @@ package com.recrutement.services.impl;
 
 import java.util.List;
 
-import com.recrutement.entity.Employeur;
-import com.recrutement.services.EmployeurService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import com.recrutement.entity.Employeur;
+import com.recrutement.repository.EmployeurRepositroy;
+import com.recrutement.services.EmployeurService;
+@Service
 public class EmployeurServiceImpl implements EmployeurService{
+
+	@Autowired
+	EmployeurRepositroy employeurRepository;
+	
+	
+	public EmployeurServiceImpl(EmployeurRepositroy employeurRepository) {
+		super();
+		this.employeurRepository = employeurRepository;
+	}
 
 	@Override
 	public List<Employeur> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return employeurRepository.findAll();
 	}
 
 	@Override
 	public Employeur getOne(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		if (id != null)
+			return employeurRepository.getOne(id);
+		return new Employeur();
 	}
 
 	@Override
 	public Employeur save(Employeur employeur) {
-		// TODO Auto-generated method stub
+		if (employeur != null)
+			return employeurRepository.save(employeur);
 		return null;
 	}
 
 	@Override
 	public void delete(Long id) {
-		// TODO Auto-generated method stub
-		
+		if (id != null)
+			employeurRepository.deleteById(id);
+
 	}
 
 }

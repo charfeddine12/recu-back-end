@@ -9,5 +9,5 @@ public interface LangueService {
 	List<Langue> getAll();
 	Langue getOne(Long id);
 	Langue save(Langue langue);
-	void delete(Long id);
+	boolean delete(Long id);
 }

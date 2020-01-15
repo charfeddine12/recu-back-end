@@ -3,22 +3,13 @@ package com.recrutement.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-enum Role{
-	ADMIN,CANDIDAT,EMPLOYEUR
-}
+
 @Entity
 @Table
 @Inheritance( strategy = InheritanceType.TABLE_PER_CLASS )
@@ -37,25 +28,32 @@ public class Utilisateur implements Serializable{
 	@Email
 	private String email;
 	@Column
-	private Role role;
+	private String role;
 	@CreationTimestamp
 	@Column
 	private Date dateAjout;
 	@UpdateTimestamp
 	@Column
 	private Date dateModif;
+	
+	@Column
+	private String password;
+	
 	public Utilisateur() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Utilisateur(Long id, String email, Role role, Date dateAjout, Date dateModif) {
+
+	public Utilisateur(Long id, @Email String email, String role, Date dateAjout, Date dateModif, String password) {
 		super();
 		this.id = id;
 		this.email = email;
 		this.role = role;
 		this.dateAjout = dateAjout;
 		this.dateModif = dateModif;
+		this.password = password;
 	}
+
 	public Long getId() {
 		return id;
 	}
@@ -68,10 +66,10 @@ public class Utilisateur implements Serializable{
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public Role getRole() {
+	public String getRole() {
 		return role;
 	}
-	public void setRole(Role role) {
+	public void setRole(String role) {
 		this.role = role;
 	}
 	public Date getDateAjout() {
@@ -86,11 +84,20 @@ public class Utilisateur implements Serializable{
 	public void setDateModif(Date dateModif) {
 		this.dateModif = dateModif;
 	}
+	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	@Override
 	public String toString() {
 		return "Utilisateur [id=" + id + ", email=" + email + ", role=" + role + ", dateAjout=" + dateAjout
-				+ ", dateModif=" + dateModif + "]";
+				+ ", dateModif=" + dateModif + ", password=" + password + "]";
 	}
-	
+
 	
 }

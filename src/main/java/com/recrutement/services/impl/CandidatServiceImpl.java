@@ -40,10 +40,20 @@ public class CandidatServiceImpl implements CandidatService {
 	}
 
 	@Override
-	public void delete(Long id) {
+	public boolean delete(Long id) {
 		if (id != null)
 			candidatRepository.deleteById(id);
-
+		if (candidatRepository.getOne(id) != null)
+			return false;
+		return true;
 	}
 
+	@Override
+	public boolean findOneByEmail(String email) {
+		if (email != null)
+			if (candidatRepository.findByEmail(email) == null)
+				return false;
+		return true;
+
+	}
 }

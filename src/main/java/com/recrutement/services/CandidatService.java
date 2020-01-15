@@ -9,5 +9,6 @@ public interface CandidatService {
 	List<Candidat> getAll();
 	Candidat getOne(Long id);
 	Candidat save(Candidat candidat);
-	void delete(Long id);
+	boolean delete(Long id);
+	boolean findOneByEmail(String email);
 }

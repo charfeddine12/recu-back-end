@@ -9,5 +9,5 @@ public interface DomaineService {
 	List<Domaine> getAll();
 	Domaine getOne(Long id);
 	Domaine save(Domaine domaine);
-	void delete(Long id);
+	boolean delete(Long id);
 }

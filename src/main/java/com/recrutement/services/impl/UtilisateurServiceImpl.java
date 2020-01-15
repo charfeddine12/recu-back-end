@@ -2,33 +2,60 @@ package com.recrutement.services.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.recrutement.entity.Candidat;
 import com.recrutement.entity.Utilisateur;
+import com.recrutement.repository.UtilisateurRepositroy;
 import com.recrutement.services.UtilisateurService;
 
-public class UtilisateurServiceImpl implements UtilisateurService{
+@Service
+public class UtilisateurServiceImpl implements UtilisateurService {
+
+	@Autowired
+	UtilisateurRepositroy utilisateurRepositroy;
+
+	public UtilisateurServiceImpl(UtilisateurRepositroy utilisateurRepositroy) {
+		super();
+		this.utilisateurRepositroy = utilisateurRepositroy;
+	}
 
 	@Override
 	public List<Utilisateur> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return utilisateurRepositroy.findAll();
 	}
 
 	@Override
 	public Utilisateur getOne(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		if (id != null)
+			return utilisateurRepositroy.getOne(id);
+		return new Candidat();
 	}
 
 	@Override
 	public Utilisateur save(Utilisateur utilisateur) {
-		// TODO Auto-generated method stub
+		if (utilisateur != null)
+			return utilisateurRepositroy.save(utilisateur);
 		return null;
 	}
 
 	@Override
-	public void delete(Long id) {
-		// TODO Auto-generated method stub
-		
+	public boolean delete(Long id) {
+		if (id != null)
+			utilisateurRepositroy.deleteById(id);
+		if (utilisateurRepositroy.getOne(id) != null)
+			return false;
+		return true;
+	}
+
+	@Override
+	public boolean findOneByEmail(String email) {
+		if (email != null)
+			if (utilisateurRepositroy.findByEmail(email) == null)
+				return false;
+		return true;
+
 	}
 
 }
