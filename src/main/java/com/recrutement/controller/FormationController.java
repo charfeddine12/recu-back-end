@@ -56,7 +56,6 @@ public class FormationController {
 		return result;
 	}
 
-	@SuppressWarnings("static-access")
 	@PostMapping("/save")
 	public Formation createFormation(@RequestBody Formation formation) throws URISyntaxException {
 		log.debug("REST request to save Formation : {}", formation);

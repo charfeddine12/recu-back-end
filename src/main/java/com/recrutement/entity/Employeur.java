@@ -7,8 +7,13 @@ import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 
 public class Employeur extends Utilisateur {
 	/**
@@ -39,6 +44,7 @@ public class Employeur extends Utilisateur {
 	@Column
 	private String pays;
 	@OneToMany
+	@JsonBackReference
 	List<Offre> offres;
 	public Employeur() {
 		super();
@@ -138,12 +144,19 @@ public class Employeur extends Utilisateur {
 	public void setPays(String pays) {
 		this.pays = pays;
 	}
+	
+	public List<Offre> getOffres() {
+		return offres;
+	}
+	public void setOffres(List<Offre> offres) {
+		this.offres = offres;
+	}
 	@Override
 	public String toString() {
 		return "Employeur [id=" + id + ", nom=" + nom + ", presentation=" + presentation + ", site=" + site
 				+ ", adresse=" + adresse + ", taille=" + taille + ", type=" + type + ", fondation=" + fondation
-				+ ", photo=" + photo + ", pays=" + pays + "]";
+				+ ", photo=" + photo + ", pays=" + pays + ", offres=" + offres + "]";
 	}
-	
+
 	
 }

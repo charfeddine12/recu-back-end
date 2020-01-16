@@ -56,7 +56,6 @@ public class PosteController {
 		return result;
 	}
 
-	@SuppressWarnings("static-access")
 	@PostMapping("/save")
 	public Poste createPoste(@RequestBody Poste poste) throws URISyntaxException {
 		log.debug("REST request to save poste : {}", poste);

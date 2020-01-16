@@ -57,7 +57,6 @@ public class CandidatController {
 		return result;
 	}
 
-	@SuppressWarnings("static-access")
 	@PostMapping("/save")
 	public Candidat createCandidat(@RequestBody Candidat candidat) throws URISyntaxException {
 		log.debug("REST request to save candidat : {}", candidat);

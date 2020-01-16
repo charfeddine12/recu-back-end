@@ -56,7 +56,6 @@ public class UtilisateurController {
 		return result;
 	}
 
-	@SuppressWarnings("static-access")
 	@PostMapping("/save")
 	public Utilisateur createUtilisateur(@RequestBody Utilisateur utilisateur) throws URISyntaxException {
 		log.debug("REST request to save utilisateur : {}", utilisateur);

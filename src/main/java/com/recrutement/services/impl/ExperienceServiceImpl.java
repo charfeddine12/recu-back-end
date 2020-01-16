@@ -3,11 +3,13 @@ package com.recrutement.services.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.recrutement.entity.Experience;
 import com.recrutement.repository.ExperienceRepositroy;
 import com.recrutement.services.ExperienceService;
 
+@Service
 public class ExperienceServiceImpl implements ExperienceService {
 
 	@Autowired

@@ -56,7 +56,6 @@ public class LangueController {
 		return result;
 	}
 
-	@SuppressWarnings("static-access")
 	@PostMapping("/save")
 	public Langue createLangue(@RequestBody Langue langue) throws URISyntaxException {
 		log.debug("REST request to save Langue : {}", langue);

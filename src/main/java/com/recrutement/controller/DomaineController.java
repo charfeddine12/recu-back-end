@@ -56,7 +56,6 @@ public class DomaineController {
 		return result;
 	}
 
-	@SuppressWarnings("static-access")
 	@PostMapping("/save")
 	public Domaine createDomaine(@RequestBody Domaine domaine) throws URISyntaxException {
 		log.debug("REST request to save candidat : {}", domaine);

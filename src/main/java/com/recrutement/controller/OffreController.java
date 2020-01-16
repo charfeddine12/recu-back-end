@@ -56,7 +56,6 @@ public class OffreController {
 		return result;
 	}
 
-	@SuppressWarnings("static-access")
 	@PostMapping("/save")
 	public Offre createOffre(@RequestBody Offre offre) throws URISyntaxException {
 		log.debug("REST request to save Offre : {}", offre);

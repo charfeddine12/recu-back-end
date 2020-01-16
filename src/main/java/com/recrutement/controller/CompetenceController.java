@@ -56,7 +56,6 @@ public class CompetenceController {
 		return result;
 	}
 
-	@SuppressWarnings("static-access")
 	@PostMapping("/competence")
 	public Competence createCompetence(@RequestBody Competence competence) throws URISyntaxException {
 		log.debug("REST request to save candidat : {}", competence);

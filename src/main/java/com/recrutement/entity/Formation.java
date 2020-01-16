@@ -8,13 +8,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+
 public class Formation implements Serializable{
 
 	/**
@@ -39,6 +46,8 @@ public class Formation implements Serializable{
 	@UpdateTimestamp
 	@Column
 	private Date dateModif;
+//	@JsonBackReference
+//	private Candidat candidat;
 	public Formation() {
 		super();
 		// TODO Auto-generated constructor stub

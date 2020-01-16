@@ -3,19 +3,27 @@ package com.recrutement.entity;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table
 //there are problem if we don't have this annotation  for the lazy loading via the hibernate proxy object. Got around it by annotating the class having lazy loaded private properties with
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 public class Candidat extends Utilisateur {
 	/**
 	 * 
@@ -42,25 +50,28 @@ public class Candidat extends Utilisateur {
 	private String adresse;
 	@Column
 	private String nationalite;
-	@OneToMany
+	
+	@OneToMany//(mappedBy = "candidat", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@JsonBackReference(value = "formations")
 	List<Formation> formations;
 
-	@OneToMany
+	@OneToMany//(mappedBy = "candidat", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@JsonBackReference(value = "competences")
 	List<Competence> competences;
 
 	@OneToMany
+	@JsonBackReference(value = "experiences")
 	List<Experience> experiences;
-	
+
 	@OneToMany
+	@JsonBackReference(value = "langues")
 	List<Langue> langues;
-	
+
 	@ManyToMany
-	@JoinTable(
-	  name = "Candidature", 
-	  joinColumns = @JoinColumn(name = "candidat_id"), 
-	  inverseJoinColumns = @JoinColumn(name = "offre_id"))
+	@JsonBackReference(value = "offres")
+	@JoinTable(name = "Candidature", joinColumns = @JoinColumn(name = "candidat_id"), inverseJoinColumns = @JoinColumn(name = "offre_id"))
 	List<Offre> offres;
-	
+
 	public Candidat() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -80,8 +91,6 @@ public class Candidat extends Utilisateur {
 		this.adresse = adresse;
 		this.nationalite = nationalite;
 	}
-
-	
 
 	public Candidat(String nom, String prenom, String photo, Date dateNaissance, String diplome, String piece_jointe,
 			String tel, String titre, String adresse, String nationalite, List<Formation> formations,
@@ -103,7 +112,6 @@ public class Candidat extends Utilisateur {
 		this.langues = langues;
 	}
 
-	
 	public Candidat(String nom, String prenom, String photo, Date dateNaissance, String diplome, String piece_jointe,
 			String tel, String titre, String adresse, String nationalite, List<Formation> formations,
 			List<Competence> competences, List<Experience> experiences, List<Langue> langues, List<Offre> offres) {
@@ -205,7 +213,6 @@ public class Candidat extends Utilisateur {
 		this.nationalite = nationalite;
 	}
 
-	
 	public List<Formation> getFormations() {
 		return formations;
 	}
@@ -230,7 +237,6 @@ public class Candidat extends Utilisateur {
 		this.experiences = experiences;
 	}
 
-	
 	public List<Langue> getLangues() {
 		return langues;
 	}

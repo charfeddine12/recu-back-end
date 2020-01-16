@@ -56,7 +56,6 @@ public class ExperienceController {
 		return result;
 	}
 
-	@SuppressWarnings("static-access")
 	@PostMapping("/save")
 	public Experience createExperience(@RequestBody Experience experience) throws URISyntaxException {
 		log.debug("REST request to save Experience : {}", experience);
