@@ -13,14 +13,13 @@ import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table
-@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 
-public class Formation implements Serializable{
+public class Formation implements Serializable {
 
 	/**
 	 * 
@@ -44,12 +43,12 @@ public class Formation implements Serializable{
 	@UpdateTimestamp
 	@Column
 	private Date dateModif;
-//	@JsonBackReference
-//	private Candidat candidat;
+
 	public Formation() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
 	public Formation(Long id, Date debut, Date fin, String titre, String etablissement, Date dateAjout,
 			Date dateModif) {
 		super();
@@ -61,53 +60,67 @@ public class Formation implements Serializable{
 		this.dateAjout = dateAjout;
 		this.dateModif = dateModif;
 	}
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public Date getDebut() {
 		return debut;
 	}
+
 	public void setDebut(Date debut) {
 		this.debut = debut;
 	}
+
 	public Date getFin() {
 		return fin;
 	}
+
 	public void setFin(Date fin) {
 		this.fin = fin;
 	}
+
 	public String getTitre() {
 		return titre;
 	}
+
 	public void setTitre(String titre) {
 		this.titre = titre;
 	}
+
 	public String getEtablissement() {
 		return etablissement;
 	}
+
 	public void setEtablissement(String etablissement) {
 		this.etablissement = etablissement;
 	}
+
 	public Date getDateAjout() {
 		return dateAjout;
 	}
+
 	public void setDateAjout(Date dateAjout) {
 		this.dateAjout = dateAjout;
 	}
+
 	public Date getDateModif() {
 		return dateModif;
 	}
+
 	public void setDateModif(Date dateModif) {
 		this.dateModif = dateModif;
 	}
+
 	@Override
 	public String toString() {
 		return "Formation [id=" + id + ", debut=" + debut + ", fin=" + fin + ", titre=" + titre + ", etablissement="
 				+ etablissement + ", dateAjout=" + dateAjout + ", dateModif=" + dateModif + "]";
 	}
-	
-	
+
 }

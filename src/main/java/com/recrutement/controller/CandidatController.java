@@ -41,7 +41,7 @@ public class CandidatController {
 
 	@GetMapping("/get/{id}")
 	public Candidat getCandidat(@PathVariable Long id) {
-		log.debug("REST request to get Candidat : {}", id);
+		log.info("REST request to get Candidat : {}", id);
 		Candidat candidat = null;
 		if (id != null)
 			candidat = candidatService.getOne(id);
@@ -50,7 +50,7 @@ public class CandidatController {
 
 	@DeleteMapping("/delete/{id}")
 	public boolean deleteCandidat(@PathVariable Long id) {
-		log.debug("REST request to delete candidat: {}", id);
+		log.info("REST request to delete candidat: {}", id);
 		boolean result = false;
 		if (id != null)
 			result = candidatService.delete(id);
@@ -59,12 +59,12 @@ public class CandidatController {
 
 	@PostMapping("/save")
 	public Candidat createCandidat(@RequestBody Candidat candidat) throws URISyntaxException {
-		log.debug("REST request to save candidat : {}", candidat);
+		log.info("REST request to save candidat :{}", candidat);
 
 		if (candidat.getId() != null) {
-			log.debug("A new candidat cannot already have an ID", "userManagement", "idexists");
+			log.info("A new candidat cannot already have an ID", "userManagement", "idexists");
 		} else if (candidatService.findOneByEmail(candidat.getEmail().toLowerCase())) {
-			log.debug("A new candidat cannot already have an Email : {}", candidat.getEmail());
+			log.info("A new candidat cannot already have an Email : {}", candidat.getEmail());
 		} else {
 			candidat.setRole(Role.CANDIDAT.name());
 			Candidat newCandidat = candidatService.save(candidat);
@@ -75,10 +75,10 @@ public class CandidatController {
 
 	@PutMapping("/update")
 	public Candidat updateCandidat(@RequestBody Candidat candidat) {
-		log.debug("REST request to update candidat : {}", candidat);
+		log.info("REST request to update candidat : {}", candidat);
 		boolean result = candidatService.findOneByEmail(candidat.getEmail());
 		if (result) {
-			log.debug("A new candidat cannot already have an Email : {}", candidat.getEmail());
+			log.info("A new candidat cannot already have an Email : {}", candidat.getEmail());
 			return null;
 		} else {
 			Candidat updatedCandidat = candidatService.save(candidat);

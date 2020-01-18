@@ -40,7 +40,7 @@ public class FormationController {
 
 	@GetMapping("/get/{id}")
 	public Formation getFormation(@PathVariable Long id) {
-		log.debug("REST request to get Formation : {}", id);
+		log.info("REST request to get Formation : {}", id);
 		Formation formation = null;
 		if (id != null)
 			formation = formationService.getOne(id);
@@ -49,7 +49,7 @@ public class FormationController {
 
 	@DeleteMapping("/delete/{id}")
 	public boolean deleteFormation(@PathVariable Long id) {
-		log.debug("REST request to delete Formation: {}", id);
+		log.info("REST request to delete Formation: {}", id);
 		boolean result = false;
 		if (id != null)
 			result = formationService.delete(id);
@@ -58,10 +58,10 @@ public class FormationController {
 
 	@PostMapping("/save")
 	public Formation createFormation(@RequestBody Formation formation) throws URISyntaxException {
-		log.debug("REST request to save Formation : {}", formation);
+		log.info("REST request to save Formation : {}", formation);
 
 		if (formation.getId() != null) {
-			log.debug("A new Formation cannot already have an ID idexists");
+			log.info("A new Formation cannot already have an ID idexists");
 		} else {
 			Formation newFormation = formationService.save(formation);
 			return newFormation;
@@ -71,7 +71,7 @@ public class FormationController {
 
 	@PutMapping("/update")
 	public Formation updateFormation(@RequestBody Formation formation) {
-		log.debug("REST request to update Formation : {}", formation);
+		log.info("REST request to update Formation : {}", formation);
 		if (formation.getId() != null)
 			if (formationService.getOne(formation.getId()) != null) {
 

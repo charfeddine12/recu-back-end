@@ -40,7 +40,7 @@ public class LangueController {
 
 	@GetMapping("/get/{id}")
 	public Langue getLangue(@PathVariable Long id) {
-		log.debug("REST request to get Langue : {}", id);
+		log.info("REST request to get Langue : {}", id);
 		Langue langue = null;
 		if (id != null)
 			langue = langueService.getOne(id);
@@ -49,7 +49,7 @@ public class LangueController {
 
 	@DeleteMapping("/delete/{id}")
 	public boolean deleteLangue(@PathVariable Long id) {
-		log.debug("REST request to delete Langue: {}", id);
+		log.info("REST request to delete Langue: {}", id);
 		boolean result = false;
 		if (id != null)
 			result = langueService.delete(id);
@@ -58,10 +58,10 @@ public class LangueController {
 
 	@PostMapping("/save")
 	public Langue createLangue(@RequestBody Langue langue) throws URISyntaxException {
-		log.debug("REST request to save Langue : {}", langue);
+		log.info("REST request to save Langue : {}", langue);
 
 		if (langue.getId() != null) {
-			log.debug("A new langue cannot already have an ID idexists");
+			log.info("A new langue cannot already have an ID idexists");
 		} else {
 			Langue newLangue = langueService.save(langue);
 			return newLangue;
@@ -71,7 +71,7 @@ public class LangueController {
 
 	@PutMapping("/update")
 	public Langue updateLangue(@RequestBody Langue langue) {
-		log.debug("REST request to update Langue : {}", langue);
+		log.info("REST request to update Langue : {}", langue);
 		if (langue.getId() != null)
 			if (langueService.getOne(langue.getId()) != null) {
 

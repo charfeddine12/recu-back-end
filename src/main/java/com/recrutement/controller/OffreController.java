@@ -40,7 +40,7 @@ public class OffreController {
 
 	@GetMapping("/get/{id}")
 	public Offre getOffre(@PathVariable Long id) {
-		log.debug("REST request to get Offre : {}", id);
+		log.info("REST request to get Offre : {}", id);
 		Offre offre = null;
 		if (id != null)
 			offre = offreService.getOne(id);
@@ -49,7 +49,7 @@ public class OffreController {
 
 	@DeleteMapping("/delete/{id}")
 	public boolean deleteOffre(@PathVariable Long id) {
-		log.debug("REST request to delete Offre: {}", id);
+		log.info("REST request to delete Offre: {}", id);
 		boolean result = false;
 		if (id != null)
 			result = offreService.delete(id);
@@ -58,10 +58,10 @@ public class OffreController {
 
 	@PostMapping("/save")
 	public Offre createOffre(@RequestBody Offre offre) throws URISyntaxException {
-		log.debug("REST request to save Offre : {}", offre);
+		log.info("REST request to save Offre : {}", offre);
 
 		if (offre.getId() != null) {
-			log.debug("A new Offre cannot already have an ID idexists");
+			log.info("A new Offre cannot already have an ID idexists");
 		} else {
 			Offre newOffre = offreService.save(offre);
 			return newOffre;
@@ -71,7 +71,7 @@ public class OffreController {
 
 	@PutMapping("/update")
 	public Offre updateOffre(@RequestBody Offre offre) {
-		log.debug("REST request to update Offre : {}", offre);
+		log.info("REST request to update Offre : {}", offre);
 		if (offre.getId() != null)
 			if (offreService.getOne(offre.getId()) != null) {
 

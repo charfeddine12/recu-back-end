@@ -40,7 +40,7 @@ public class DomaineController {
 
 	@GetMapping("/get/{id}")
 	public Domaine getDomaine(@PathVariable Long id) {
-		log.debug("REST request to get Domaine : {}", id);
+		log.info("REST request to get Domaine : {}", id);
 		Domaine domaine = null;
 		if (id != null)
 			domaine = domaineService.getOne(id);
@@ -49,7 +49,7 @@ public class DomaineController {
 
 	@DeleteMapping("/delete/{id}")
 	public boolean deleteDomaine(@PathVariable Long id) {
-		log.debug("REST request to delete competence: {}", id);
+		log.info("REST request to delete competence: {}", id);
 		boolean result = false;
 		if (id != null)
 			result = domaineService.delete(id);
@@ -58,10 +58,10 @@ public class DomaineController {
 
 	@PostMapping("/save")
 	public Domaine createDomaine(@RequestBody Domaine domaine) throws URISyntaxException {
-		log.debug("REST request to save candidat : {}", domaine);
+		log.info("REST request to save candidat : {}", domaine);
 
 		if (domaine.getId() != null) {
-			log.debug("A new candidat cannot already have an ID idexists");
+			log.info("A new candidat cannot already have an ID idexists");
 		} else {
 			Domaine newDomaine = domaineService.save(domaine);
 			return newDomaine;
@@ -71,7 +71,7 @@ public class DomaineController {
 
 	@PutMapping("/update")
 	public Domaine updateDomaine(@RequestBody Domaine domaine) {
-		log.debug("REST request to update candidat : {}", domaine);
+		log.info("REST request to update candidat : {}", domaine);
 		if (domaine.getId() != null)
 			if (domaineService.getOne(domaine.getId()) != null) {
 
