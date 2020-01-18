@@ -40,7 +40,7 @@ public class UtilisateurController {
 
 	@GetMapping("/get/{id}")
 	public Utilisateur getUtilisateur(@PathVariable Long id) {
-		log.debug("REST request to get Utilisateur : {}", id);
+		log.info("REST request to get Utilisateur : {}", id);
 		Utilisateur utilisateur = null;
 		if (id != null)
 			utilisateur = utilisateurService.getOne(id);
@@ -49,7 +49,7 @@ public class UtilisateurController {
 
 	@DeleteMapping("/delete/{id}")
 	public boolean deleteUtilisateur(@PathVariable Long id) {
-		log.debug("REST request to delete Utilisateur: {}", id);
+		log.info("REST request to delete Utilisateur: {}", id);
 		boolean result = false;
 		if (id != null)
 			result = utilisateurService.delete(id);
@@ -58,10 +58,10 @@ public class UtilisateurController {
 
 	@PostMapping("/save")
 	public Utilisateur createUtilisateur(@RequestBody Utilisateur utilisateur) throws URISyntaxException {
-		log.debug("REST request to save utilisateur : {}", utilisateur);
+		log.info("REST request to save utilisateur : {}", utilisateur);
 
 		if (utilisateur.getId() != null) {
-			log.debug("A new Utilisateur cannot already have an ID idexists");
+			log.info("A new Utilisateur cannot already have an ID idexists");
 		} else {
 			Utilisateur newUtilisateur = utilisateurService.save(utilisateur);
 			return newUtilisateur;
@@ -71,7 +71,7 @@ public class UtilisateurController {
 
 	@PutMapping("/update")
 	public Utilisateur updateUtilisateur(@RequestBody Utilisateur utilisateur) {
-		log.debug("REST request to update Utilisateur : {}", utilisateur);
+		log.info("REST request to update Utilisateur : {}", utilisateur);
 		if (utilisateur.getId() != null)
 			if (utilisateurService.getOne(utilisateur.getId()) != null) {
 

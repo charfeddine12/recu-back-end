@@ -3,6 +3,7 @@ package com.recrutement.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,13 +14,12 @@ import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table
-@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
-
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+@Cacheable(false)
 public class Competence implements Serializable {
 
 	/**
@@ -38,8 +38,6 @@ public class Competence implements Serializable {
 	@UpdateTimestamp
 	private Date dateModif;
 
-//	private Candidat candidat;
-
 	public Competence() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -52,8 +50,6 @@ public class Competence implements Serializable {
 		this.dateAjout = dateAjout;
 		this.dateModif = dateModif;
 	}
-
-
 
 	public Long getId() {
 		return id;
@@ -87,13 +83,10 @@ public class Competence implements Serializable {
 		this.dateModif = dateModif;
 	}
 
-
-//	@Override
-//	public String toString() {
-//		return "Competence [id=" + id + ", intitule=" + intitule + ", dateAjout=" + dateAjout + ", dateModif="
-//				+ dateModif + ", candidat=" + candidat + "]";
-//	}
-
-
+	@Override
+	public String toString() {
+		return "Competence [id=" + id + ", intitule=" + intitule + ", dateAjout=" + dateAjout + ", dateModif="
+				+ dateModif + "]";
+	}
 
 }

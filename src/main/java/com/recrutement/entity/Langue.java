@@ -3,6 +3,7 @@ package com.recrutement.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-
+@Cacheable(false)
 public class Langue implements Serializable{
 
 	/**
@@ -41,11 +42,6 @@ public class Langue implements Serializable{
 	@UpdateTimestamp
 	@Column
 	private Date dateModif;
-
-//	@JsonManagedReference
-//	private Candidat candidat;
-//	@JsonManagedReference
-//	private Offre offre;
 	
 	public Langue() {
 		super();

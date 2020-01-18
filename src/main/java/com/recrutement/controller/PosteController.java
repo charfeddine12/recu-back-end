@@ -40,7 +40,7 @@ public class PosteController {
 
 	@GetMapping("/get/{id}")
 	public Poste getPoste(@PathVariable Long id) {
-		log.debug("REST request to get Poste : {}", id);
+		log.info("REST request to get Poste : {}", id);
 		Poste poste = null;
 		if (id != null)
 			poste = posteService.getOne(id);
@@ -49,7 +49,7 @@ public class PosteController {
 
 	@DeleteMapping("/delete/{id}")
 	public boolean deletePoste(@PathVariable Long id) {
-		log.debug("REST request to delete Poste: {}", id);
+		log.info("REST request to delete Poste: {}", id);
 		boolean result = false;
 		if (id != null)
 			result = posteService.delete(id);
@@ -58,10 +58,10 @@ public class PosteController {
 
 	@PostMapping("/save")
 	public Poste createPoste(@RequestBody Poste poste) throws URISyntaxException {
-		log.debug("REST request to save poste : {}", poste);
+		log.info("REST request to save poste : {}", poste);
 
 		if (poste.getId() != null) {
-			log.debug("A new Poste cannot already have an ID idexists");
+			log.info("A new Poste cannot already have an ID idexists");
 		} else {
 			Poste newPoste = posteService.save(poste);
 			return newPoste;
@@ -71,7 +71,7 @@ public class PosteController {
 
 	@PutMapping("/update")
 	public Poste updatePoste(@RequestBody Poste poste) {
-		log.debug("REST request to update Poste : {}", poste);
+		log.info("REST request to update Poste : {}", poste);
 		if (poste.getId() != null)
 			if (posteService.getOne(poste.getId()) != null) {
 

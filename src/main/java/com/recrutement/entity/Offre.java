@@ -10,7 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -40,25 +42,21 @@ public class Offre implements Serializable {
 	private String horaire;
 	@Column
 	private String salaire;
-	@Column(name="niveauExperience")
+	@Column(name = "niveauExperience")
 	private String niveauExperience;
 	@CreationTimestamp
 	@Column
 	private Date dateAjout;
 	@UpdateTimestamp
 	@Column
-	private Date dateModif; 
+	private Date dateModif;
 
-	//@JsonBackReference(value = "domaine")
-	@JoinColumn(name = "domaine", referencedColumnName = "id",columnDefinition="bigint(20)")
+	@ManyToOne
 	private Domaine domaine;
 
-
-	@OneToMany
+	@ManyToMany
+	@JoinTable(name = "offre_langues", joinColumns = @JoinColumn(name = "offre_id"), inverseJoinColumns = @JoinColumn(name = "langues_id"))
 	private List<Langue> langues;
-
-//	@ManyToMany(mappedBy = "offres")
-//	List<Candidat> candidats;
 
 	public Offre() {
 		super();
@@ -67,7 +65,7 @@ public class Offre implements Serializable {
 
 	public Offre(Long id, String niveauEtude, String fonction, String horaire, String salaire, String niveauExperience,
 			Date dateAjout, Date dateModif) {
-		super(); 
+		super();
 		this.id = id;
 		this.niveauEtude = niveauEtude;
 		this.fonction = fonction;
@@ -92,8 +90,6 @@ public class Offre implements Serializable {
 		this.domaine = domaine;
 		this.langues = langues;
 	}
-
-
 
 	public Long getId() {
 		return id;
@@ -175,15 +171,11 @@ public class Offre implements Serializable {
 		this.langues = langues;
 	}
 
-
 	@Override
 	public String toString() {
 		return "Offre [id=" + id + ", niveauEtude=" + niveauEtude + ", fonction=" + fonction + ", horaire=" + horaire
 				+ ", salaire=" + salaire + ", niveauExperience=" + niveauExperience + ", dateAjout=" + dateAjout
-				+ ", dateModif=" + dateModif + ", domaine=" + domaine + ", langues=" + langues +"]";
+				+ ", dateModif=" + dateModif + ", domaine=" + domaine + ", langues=" + langues + "]";
 	}
-
-	
-
 
 }

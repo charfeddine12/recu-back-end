@@ -3,6 +3,7 @@ package com.recrutement.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,13 +14,12 @@ import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+@Cacheable(false)
 public class Experience implements Serializable {
 
 	/**
@@ -48,8 +48,6 @@ public class Experience implements Serializable {
 	@UpdateTimestamp
 	@Column
 	private Date dateModif;
-//	@JsonBackReference
-//	private Candidat candidat;
 
 	public Experience() {
 		super();

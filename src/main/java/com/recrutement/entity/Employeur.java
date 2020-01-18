@@ -14,19 +14,18 @@ import javax.persistence.Table;
 import javax.validation.constraints.Email;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table
-@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 
 public class Employeur extends Utilisateur {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column
@@ -52,14 +51,17 @@ public class Employeur extends Utilisateur {
 	@OneToMany
 	@JsonBackReference
 	List<Offre> offres;
+
 	public Employeur() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
 	public Employeur(Long id, Email email, Role role, Date dateAjout, Date dateModif) {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
 	public Employeur(Long id, String nom, String presentation, String site, String adresse, String taille, String type,
 			String fondation, File photo, String pays) {
 		super();
@@ -74,7 +76,7 @@ public class Employeur extends Utilisateur {
 		this.photo = photo;
 		this.pays = pays;
 	}
-	
+
 	public Employeur(Long id, String nom, String presentation, String site, String adresse, String taille, String type,
 			String fondation, File photo, String pays, List<Offre> offres) {
 		super();
@@ -90,73 +92,95 @@ public class Employeur extends Utilisateur {
 		this.pays = pays;
 		this.offres = offres;
 	}
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getNom() {
 		return nom;
 	}
+
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
+
 	public String getPresentation() {
 		return presentation;
 	}
+
 	public void setPresentation(String presentation) {
 		this.presentation = presentation;
 	}
+
 	public String getSite() {
 		return site;
 	}
+
 	public void setSite(String site) {
 		this.site = site;
 	}
+
 	public String getAdresse() {
 		return adresse;
 	}
+
 	public void setAdresse(String adresse) {
 		this.adresse = adresse;
 	}
+
 	public String getTaille() {
 		return taille;
 	}
+
 	public void setTaille(String taille) {
 		this.taille = taille;
 	}
+
 	public String getType() {
 		return type;
 	}
+
 	public void setType(String type) {
 		this.type = type;
 	}
+
 	public String getFondation() {
 		return fondation;
 	}
+
 	public void setFondation(String fondation) {
 		this.fondation = fondation;
 	}
+
 	public File getPhoto() {
 		return photo;
 	}
+
 	public void setPhoto(File photo) {
 		this.photo = photo;
 	}
+
 	public String getPays() {
 		return pays;
 	}
+
 	public void setPays(String pays) {
 		this.pays = pays;
 	}
-	
+
 	public List<Offre> getOffres() {
 		return offres;
 	}
+
 	public void setOffres(List<Offre> offres) {
 		this.offres = offres;
 	}
+
 	@Override
 	public String toString() {
 		return "Employeur [id=" + id + ", nom=" + nom + ", presentation=" + presentation + ", site=" + site
@@ -164,5 +188,4 @@ public class Employeur extends Utilisateur {
 				+ ", photo=" + photo + ", pays=" + pays + ", offres=" + offres + "]";
 	}
 
-	
 }

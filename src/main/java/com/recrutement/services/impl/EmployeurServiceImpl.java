@@ -8,13 +8,13 @@ import org.springframework.stereotype.Service;
 import com.recrutement.entity.Employeur;
 import com.recrutement.repository.EmployeurRepositroy;
 import com.recrutement.services.EmployeurService;
+
 @Service
-public class EmployeurServiceImpl implements EmployeurService{
+public class EmployeurServiceImpl implements EmployeurService {
 
 	@Autowired
 	EmployeurRepositroy employeurRepository;
-	
-	
+
 	public EmployeurServiceImpl(EmployeurRepositroy employeurRepository) {
 		super();
 		this.employeurRepository = employeurRepository;
@@ -40,10 +40,13 @@ public class EmployeurServiceImpl implements EmployeurService{
 	}
 
 	@Override
-	public void delete(Long id) {
+	public boolean delete(Long id) {
+
 		if (id != null)
 			employeurRepository.deleteById(id);
-
+		if (employeurRepository.getOne(id) != null)
+			return false;
+		return true;
 	}
 
 }

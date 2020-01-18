@@ -9,5 +9,5 @@ public interface EmployeurService {
 	List<Employeur> getAll();
 	Employeur getOne(Long id);
 	Employeur save(Employeur employeur);
-	void delete(Long id);
+	boolean delete(Long id);
 }

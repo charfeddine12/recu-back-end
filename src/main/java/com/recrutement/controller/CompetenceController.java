@@ -32,36 +32,36 @@ public class CompetenceController {
 		this.competenceService = competenceService;
 	}
 
-	@GetMapping("/competences")
+	@GetMapping("/get")
 	public List<Competence> getAllCompetences() {
 		final List<Competence> listCompetence = competenceService.getAll();
 		return listCompetence;
 	}
 
-	@GetMapping("/competence/{id}")
+	@GetMapping("/get/{id}")
 	public Competence getCompetence(@PathVariable Long id) {
-		log.debug("REST request to get competence : {}", id);
+		log.info("REST request to get competence : {}", id);
 		Competence competence = null;
 		if (id != null)
 			competence = competenceService.getOne(id);
 		return competence;
 	}
 
-	@DeleteMapping("/competence/{id}")
+	@DeleteMapping("/delete/{id}")
 	public boolean deleteCompetence(@PathVariable Long id) {
-		log.debug("REST request to delete competence: {}", id);
+		log.info("REST request to delete competence: {}", id);
 		boolean result = false;
 		if (id != null)
 			result = competenceService.delete(id);
 		return result;
 	}
 
-	@PostMapping("/competence")
+	@PostMapping("/save")
 	public Competence createCompetence(@RequestBody Competence competence) throws URISyntaxException {
-		log.debug("REST request to save candidat : {}", competence);
+		log.info("REST request to save candidat : {}", competence);
 
 		if (competence.getId() != null) {
-			log.debug("A new candidat cannot already have an ID", "userManagement", "idexists");
+			log.info("A new candidat cannot already have an ID", "userManagement", "idexists");
 		} else {
 			Competence newCompetence = competenceService.save(competence);
 			return newCompetence;
@@ -69,9 +69,9 @@ public class CompetenceController {
 		return null;
 	}
 
-	@PutMapping("/competence")
+	@PutMapping("/update")
 	public Competence updateCompetence(@RequestBody Competence competence) {
-		log.debug("REST request to update candidat : {}", competence);
+		log.info("REST request to update candidat : {}", competence);
 		if (competence.getId() != null)
 			if (competenceService.getOne(competence.getId()) != null) {
 

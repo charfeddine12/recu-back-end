@@ -40,7 +40,7 @@ public class ExperienceController {
 
 	@GetMapping("/get/{id}")
 	public Experience getExperience(@PathVariable Long id) {
-		log.debug("REST request to get Experience : {}", id);
+		log.info("REST request to get Experience : {}", id);
 		Experience experience = null;
 		if (id != null)
 			experience = experienceService.getOne(id);
@@ -49,7 +49,7 @@ public class ExperienceController {
 
 	@DeleteMapping("/delete/{id}")
 	public boolean deleteExperience(@PathVariable Long id) {
-		log.debug("REST request to delete Experience: {}", id);
+		log.info("REST request to delete Experience: {}", id);
 		boolean result = false;
 		if (id != null)
 			result = experienceService.delete(id);
@@ -58,10 +58,10 @@ public class ExperienceController {
 
 	@PostMapping("/save")
 	public Experience createExperience(@RequestBody Experience experience) throws URISyntaxException {
-		log.debug("REST request to save Experience : {}", experience);
+		log.info("REST request to save Experience : {}", experience);
 
 		if (experience.getId() != null) {
-			log.debug("A new experience cannot already have an ID idexists");
+			log.info("A new experience cannot already have an ID idexists");
 		} else {
 			Experience newExperience = experienceService.save(experience);
 			return newExperience;
@@ -71,7 +71,7 @@ public class ExperienceController {
 
 	@PutMapping("/update")
 	public Experience updateExperience(@RequestBody Experience experience) {
-		log.debug("REST request to update Experience : {}", experience);
+		log.info("REST request to update Experience : {}", experience);
 		if (experience.getId() != null)
 			if (experienceService.getOne(experience.getId()) != null) {
 

@@ -3,23 +3,21 @@ package com.recrutement.entity;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table
 //there are problem if we don't have this annotation  for the lazy loading via the hibernate proxy object. Got around it by annotating the class having lazy loaded private properties with
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+@Cacheable(false)
 public class Candidat extends Utilisateur {
 	/**
 	 * 
@@ -46,18 +44,21 @@ public class Candidat extends Utilisateur {
 	private String adresse;
 	@Column
 	private String nationalite;
-	
-	@OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-	@JsonBackReference(value = "formations")
+
+	@ManyToMany
+	@JoinTable(name = "candidat_formations", joinColumns = @JoinColumn(name = "candidat_id"), inverseJoinColumns = @JoinColumn(name = "formations_id"))
 	List<Formation> formations;
 
-	@OneToMany( fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@ManyToMany
+	@JoinTable(name = "candidat_competences", joinColumns = @JoinColumn(name = "candidat_id"), inverseJoinColumns = @JoinColumn(name = "competences_id"))
 	List<Competence> competences;
 
-	@OneToMany
+	@ManyToMany
+	@JoinTable(name = "candidat_experiences", joinColumns = @JoinColumn(name = "candidat_id"), inverseJoinColumns = @JoinColumn(name = "experiences_id"))
 	List<Experience> experiences;
 
-	@OneToMany
+	@ManyToMany
+	@JoinTable(name = "candidat_langues", joinColumns = @JoinColumn(name = "candidat_id"), inverseJoinColumns = @JoinColumn(name = "langues_id"))
 	List<Langue> langues;
 
 	@ManyToMany
