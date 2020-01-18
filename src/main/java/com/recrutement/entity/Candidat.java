@@ -14,16 +14,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table
 //there are problem if we don't have this annotation  for the lazy loading via the hibernate proxy object. Got around it by annotating the class having lazy loaded private properties with
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 public class Candidat extends Utilisateur {
 	/**
 	 * 
@@ -51,24 +47,20 @@ public class Candidat extends Utilisateur {
 	@Column
 	private String nationalite;
 	
-	@OneToMany//(mappedBy = "candidat", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 	@JsonBackReference(value = "formations")
 	List<Formation> formations;
 
-	@OneToMany//(mappedBy = "candidat", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-	@JsonBackReference(value = "competences")
+	@OneToMany( fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	List<Competence> competences;
 
 	@OneToMany
-	@JsonBackReference(value = "experiences")
 	List<Experience> experiences;
 
 	@OneToMany
-	@JsonBackReference(value = "langues")
 	List<Langue> langues;
 
 	@ManyToMany
-	@JsonBackReference(value = "offres")
 	@JoinTable(name = "Candidature", joinColumns = @JoinColumn(name = "candidat_id"), inverseJoinColumns = @JoinColumn(name = "offre_id"))
 	List<Offre> offres;
 

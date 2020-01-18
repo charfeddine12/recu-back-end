@@ -3,7 +3,14 @@ package com.recrutement.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.Table;
 import javax.validation.constraints.Email;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -12,13 +19,12 @@ import org.hibernate.annotations.UpdateTimestamp;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-
 @Entity
 @Table
-@Inheritance( strategy = InheritanceType.TABLE_PER_CLASS )
-@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 
-public class Utilisateur implements Serializable{
+public class Utilisateur implements Serializable {
 
 	/**
 	 * 
@@ -39,10 +45,10 @@ public class Utilisateur implements Serializable{
 	@UpdateTimestamp
 	@Column
 	private Date dateModif;
-	
+
 	@Column
 	private String password;
-	
+
 	public Utilisateur() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -61,34 +67,43 @@ public class Utilisateur implements Serializable{
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 	public String getRole() {
 		return role;
 	}
+
 	public void setRole(String role) {
 		this.role = role;
 	}
+
 	public Date getDateAjout() {
 		return dateAjout;
 	}
+
 	public void setDateAjout(Date dateAjout) {
 		this.dateAjout = dateAjout;
 	}
+
 	public Date getDateModif() {
 		return dateModif;
 	}
+
 	public void setDateModif(Date dateModif) {
 		this.dateModif = dateModif;
 	}
-	
+
 	public String getPassword() {
 		return password;
 	}
@@ -103,5 +118,4 @@ public class Utilisateur implements Serializable{
 				+ ", dateModif=" + dateModif + ", password=" + password + "]";
 	}
 
-	
 }

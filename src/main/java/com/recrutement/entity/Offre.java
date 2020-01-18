@@ -4,27 +4,19 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table
@@ -65,8 +57,8 @@ public class Offre implements Serializable {
 	@OneToMany
 	private List<Langue> langues;
 
-	@ManyToMany(mappedBy = "offres")
-	List<Candidat> candidats;
+//	@ManyToMany(mappedBy = "offres")
+//	List<Candidat> candidats;
 
 	public Offre() {
 		super();
@@ -102,21 +94,6 @@ public class Offre implements Serializable {
 	}
 
 
-	public Offre(Long id, String niveauEtude, String fonction, String horaire, String salaire, String niveauExperience,
-			Date dateAjout, Date dateModif, Domaine domaine, List<Langue> langues, List<Candidat> candidats) {
-		super();
-		this.id = id;
-		this.niveauEtude = niveauEtude;
-		this.fonction = fonction;
-		this.horaire = horaire;
-		this.salaire = salaire;
-		this.niveauExperience = niveauExperience;
-		this.dateAjout = dateAjout;
-		this.dateModif = dateModif;
-		this.domaine = domaine;
-		this.langues = langues;
-		this.candidats = candidats;
-	}
 
 	public Long getId() {
 		return id;
@@ -198,20 +175,12 @@ public class Offre implements Serializable {
 		this.langues = langues;
 	}
 
-	public List<Candidat> getCandidats() {
-		return candidats;
-	}
-
-	public void setCandidats(List<Candidat> candidats) {
-		this.candidats = candidats;
-	}
 
 	@Override
 	public String toString() {
 		return "Offre [id=" + id + ", niveauEtude=" + niveauEtude + ", fonction=" + fonction + ", horaire=" + horaire
 				+ ", salaire=" + salaire + ", niveauExperience=" + niveauExperience + ", dateAjout=" + dateAjout
-				+ ", dateModif=" + dateModif + ", domaine=" + domaine + ", langues=" + langues + ", candidats="
-				+ candidats + "]";
+				+ ", dateModif=" + dateModif + ", domaine=" + domaine + ", langues=" + langues +"]";
 	}
 
 	
