@@ -11,4 +11,6 @@ public interface UtilisateurService {
 	Utilisateur save(Utilisateur utilisateur);
 	boolean delete(Long id);
 	boolean findOneByEmail(String email);
+	Utilisateur authentication(String login, String pwd);
+	Utilisateur findUserByEmail(String email);
 }

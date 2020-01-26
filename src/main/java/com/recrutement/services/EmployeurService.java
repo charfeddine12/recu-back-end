@@ -10,4 +10,5 @@ public interface EmployeurService {
 	Employeur getOne(Long id);
 	Employeur save(Employeur employeur);
 	boolean delete(Long id);
+	boolean findOneByEmail(String lowerCase);
 }

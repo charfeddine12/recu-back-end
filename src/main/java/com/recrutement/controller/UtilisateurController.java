@@ -6,6 +6,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +21,8 @@ import com.recrutement.services.UtilisateurService;
 
 @RestController
 @RequestMapping("/api/utilisateur")
+@CrossOrigin(origins = "http://localhost:4200")
+
 public class UtilisateurController {
 
 	private final Logger log = LoggerFactory.getLogger(UtilisateurController.class);
@@ -80,5 +83,22 @@ public class UtilisateurController {
 			}
 		return null;
 
+	}
+
+	@GetMapping(value = "/authentication/{login}/{pwd}")
+	public Utilisateur authentication(@PathVariable("login") String login, @PathVariable("pwd") String pwd) {
+		log.info("REST request to authentificate Utilisateur with login : {} , and password :{}", login, pwd);
+		return utilisateurService.authentication(login, pwd);
+	}
+	
+	@GetMapping(value = "/findByLogin/{login}")
+	public Utilisateur findByLogin(@PathVariable("login") String login) {
+		log.info("REST request to fing Utilisateur by login : {}", login);
+
+		Utilisateur utitlisateur = utilisateurService.findUserByEmail(login.toLowerCase());
+		log.info("result request to fing Utilisateur by login : {}", utitlisateur);
+
+		return utitlisateur;
+		 
 	}
 }
