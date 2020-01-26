@@ -12,5 +12,7 @@ public interface CandidatRepositroy extends JpaRepository<Candidat, Long> {
 
 	@Query("select candidat from Candidat candidat where candidat.email=:email")
 	public Candidat findByEmail(@Param("email") String email);
+	@Query("select candidat from Candidat candidat where candidat.email = :email and candidat.password = :password")
+	Candidat authentication(@Param("email")String email, @Param("password")String password);
 
 }

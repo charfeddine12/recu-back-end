@@ -50,10 +50,11 @@ public class CandidatServiceImpl implements CandidatService {
 
 	@Override
 	public boolean findOneByEmail(String email) {
-		if (email != null)
+		if (email != null) {
 			if (candidatRepository.findByEmail(email) == null)
-				return false;
-		return true;
+				return true;
+		}
+		return false;
 
 	}
 }

@@ -48,5 +48,13 @@ public class EmployeurServiceImpl implements EmployeurService {
 			return false;
 		return true;
 	}
+	@Override
+	public boolean findOneByEmail(String email) {
+		if (email != null) {
+			if (employeurRepository.findByEmail(email) == null)
+				return true;
+		}
+		return false;
 
+	}
 }
