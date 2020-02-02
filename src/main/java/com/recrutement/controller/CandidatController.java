@@ -76,8 +76,7 @@ public class CandidatController {
 
 	@PostMapping("/save")
 	public Candidat createCandidat(@RequestBody Candidat candidat) throws IOException {
-		byte[] fileContent = null;
-		byte[] fileContentCV;
+
 		if (candidat.getId() != null) {
 			log.info("A new candidat cannot already have an ID", "userManagement", "idexists");
 		} else if (!employeurService.findOneByEmail(candidat.getEmail().toLowerCase())
@@ -85,18 +84,6 @@ public class CandidatController {
 			log.info("A new candidat cannot already have an Email : {}", candidat.getEmail());
 		} else {
 			log.info("A candidat : {}", candidat);
-//			if (candidat.getPiece_jointePath() != null) {
-//				fileContentCV = FileUtils.readFileToByteArray(new File(candidat.getPiece_jointePath()));
-//				String encodedStringCV = Base64.getEncoder().encodeToString(fileContentCV);
-//				candidat.setPiece_jointe(encodedStringCV);
-//
-//			}
-//			if (candidat.getPhoto() != null) {
-//				fileContent = FileUtils.readFileToByteArray(new File(candidat.getPhotoPath()));
-//				String encodedString = Base64.getEncoder().encodeToString(fileContent);
-//				candidat.setPhoto(encodedString);
-//			}
-
 			candidat.setRole(Role.CANDIDAT.name());
 			Candidat newCandidat = candidatService.save(candidat);
 			return newCandidat;
@@ -122,14 +109,21 @@ public class CandidatController {
 	@PostMapping(value = "/uploadfile")
 	public boolean handleFileUpload(@RequestParam("file") MultipartFile file,
 			@RequestParam(value = "mail", required = true) String email,
-			@RequestParam(value = "id", required = false) String id) {
+			@RequestParam(value = "id", required = false) String id,
+			@RequestParam(value = "type", required = false) String type) {
 		log.info("A new save file :{}, with email :{} ,and id :{} : {}",file.getOriginalFilename(),email,id);
 
 		if (!file.isEmpty()) {
 			try {
 				Candidat candidat = candidatService.getOne(Long.valueOf(id));
-				candidat.setPhoto(file.getBytes());
-				candidatService.save(candidat);
+				if(type.equals("PHOTO")) {
+					candidat.setPhoto(file.getBytes());
+					candidatService.save(candidat);	
+				}else if (type.equals("CV")) {
+					candidat.setPiece_jointe(file.getBytes());
+					candidatService.save(candidat);	
+				}
+
 				log.info("A canddd: {}",candidat);
 
 				return true;
@@ -141,5 +135,6 @@ public class CandidatController {
 		return false;
 	}
 
+	
 
 }

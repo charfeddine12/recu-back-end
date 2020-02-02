@@ -41,10 +41,13 @@ public class CandidatServiceImpl implements CandidatService {
 
 	@Override
 	public boolean delete(Long id) {
-		if (id != null)
+		if (id != null) {
 			candidatRepository.deleteById(id);
-		if (candidatRepository.getOne(id) != null)
+
+		}
+		if (candidatRepository.getOne(id) == null) {
 			return false;
+		}
 		return true;
 	}
 
