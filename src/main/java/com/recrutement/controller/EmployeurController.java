@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.recrutement.entity.Employeur;
+import com.recrutement.entity.Role;
 import com.recrutement.services.CandidatService;
 import com.recrutement.services.EmployeurService;
 
@@ -83,6 +84,7 @@ public class EmployeurController {
 
 			throw new Exception("A new Employeur cannot already have an Email");
 		} else {
+			employeur.setRole(Role.EMPLOYEUR.name());
 			Employeur newEmployeur = employeurService.save(employeur);
 			return newEmployeur;
 		}
