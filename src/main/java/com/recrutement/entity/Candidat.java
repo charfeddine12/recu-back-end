@@ -1,5 +1,6 @@
 package com.recrutement.entity;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -28,14 +30,11 @@ public class Candidat extends Utilisateur {
 	private String nom;
 	@Column
 	private String prenom;
-	@Column
-	private String photo;
+
 	@Column
 	private Date dateNaissance;
 	@Column
 	private String diplome;
-	@Column
-	private String piece_jointe;
 	@Column
 	private String tel;
 	@Column
@@ -45,6 +44,13 @@ public class Candidat extends Utilisateur {
 	@Column
 	private String nationalite;
 
+    @Lob
+	@Column
+	private  byte[] photo;
+    @Lob
+	@Column
+	private byte[] piece_jointe;
+	
 	@ManyToMany
 	@JoinTable(name = "candidat_formations", joinColumns = @JoinColumn(name = "candidat_id"), inverseJoinColumns = @JoinColumn(name = "formations_id"))
 	List<Formation> formations;
@@ -70,61 +76,20 @@ public class Candidat extends Utilisateur {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Candidat(String nom, String prenom, String photo, Date dateNaissance, String diplome, String piece_jointe,
+	public Candidat(String nom, String prenom, byte[] photo, Date dateNaissance, String diplome, byte[] piece_jointe,
 			String tel, String titre, String adresse, String nationalite) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
-		this.photo = photo;
 		this.dateNaissance = dateNaissance;
 		this.diplome = diplome;
-		this.piece_jointe = piece_jointe;
 		this.tel = tel;
 		this.titre = titre;
 		this.adresse = adresse;
 		this.nationalite = nationalite;
 	}
 
-	public Candidat(String nom, String prenom, String photo, Date dateNaissance, String diplome, String piece_jointe,
-			String tel, String titre, String adresse, String nationalite, List<Formation> formations,
-			List<Competence> competences, List<Experience> experiences, List<Langue> langues) {
-		super();
-		this.nom = nom;
-		this.prenom = prenom;
-		this.photo = photo;
-		this.dateNaissance = dateNaissance;
-		this.diplome = diplome;
-		this.piece_jointe = piece_jointe;
-		this.tel = tel;
-		this.titre = titre;
-		this.adresse = adresse;
-		this.nationalite = nationalite;
-		this.formations = formations;
-		this.competences = competences;
-		this.experiences = experiences;
-		this.langues = langues;
-	}
 
-	public Candidat(String nom, String prenom, String photo, Date dateNaissance, String diplome, String piece_jointe,
-			String tel, String titre, String adresse, String nationalite, List<Formation> formations,
-			List<Competence> competences, List<Experience> experiences, List<Langue> langues, List<Offre> offres) {
-		super();
-		this.nom = nom;
-		this.prenom = prenom;
-		this.photo = photo;
-		this.dateNaissance = dateNaissance;
-		this.diplome = diplome;
-		this.piece_jointe = piece_jointe;
-		this.tel = tel;
-		this.titre = titre;
-		this.adresse = adresse;
-		this.nationalite = nationalite;
-		this.formations = formations;
-		this.competences = competences;
-		this.experiences = experiences;
-		this.langues = langues;
-		this.offres = offres;
-	}
 
 	public String getNom() {
 		return nom;
@@ -142,14 +107,6 @@ public class Candidat extends Utilisateur {
 		this.prenom = prenom;
 	}
 
-	public String getPhoto() {
-		return photo;
-	}
-
-	public void setPhoto(String photo) {
-		this.photo = photo;
-	}
-
 	public Date getDateNaissance() {
 		return dateNaissance;
 	}
@@ -165,15 +122,6 @@ public class Candidat extends Utilisateur {
 	public void setDiplome(String diplome) {
 		this.diplome = diplome;
 	}
-
-	public String getPiece_jointe() {
-		return piece_jointe;
-	}
-
-	public void setPiece_jointe(String piece_jointe) {
-		this.piece_jointe = piece_jointe;
-	}
-
 	public String getTel() {
 		return tel;
 	}
@@ -246,13 +194,32 @@ public class Candidat extends Utilisateur {
 		this.offres = offres;
 	}
 
+	public byte[] getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(byte[] photo) {
+		this.photo = photo;
+	}
+
+	public byte[] getPiece_jointe() {
+		return piece_jointe;
+	}
+
+	public void setPiece_jointe(byte[] piece_jointe) {
+		this.piece_jointe = piece_jointe;
+	}
+
 	@Override
 	public String toString() {
-		return "Candidat [nom=" + nom + ", prenom=" + prenom + ", photo=" + photo + ", dateNaissance=" + dateNaissance
-				+ ", diplome=" + diplome + ", piece_jointe=" + piece_jointe + ", tel=" + tel + ", titre=" + titre
-				+ ", adresse=" + adresse + ", nationalite=" + nationalite + ", formations=" + formations
-				+ ", competences=" + competences + ", experiences=" + experiences + ", langues=" + langues + ", offres="
-				+ offres + "]";
+		return "Candidat [nom=" + nom + ", prenom=" + prenom + ", dateNaissance=" + dateNaissance + ", diplome="
+				+ diplome + ", tel=" + tel + ", titre=" + titre + ", adresse=" + adresse + ", nationalite="
+				+ nationalite + ", photo=" + Arrays.toString(photo) + ", piece_jointe=" + Arrays.toString(piece_jointe)
+				+ ", formations=" + formations + ", competences=" + competences + ", experiences=" + experiences
+				+ ", langues=" + langues + ", offres=" + offres + "]";
 	}
+
+
+
 
 }

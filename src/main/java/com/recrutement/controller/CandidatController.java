@@ -1,6 +1,5 @@
 package com.recrutement.controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -39,11 +38,11 @@ public class CandidatController {
 	@Autowired
 	EmployeurService employeurService;
 
-
 	@Autowired
 	private HttpServletRequest request;
 
-	public CandidatController(CandidatService candidatService, EmployeurService employeurService, HttpServletRequest request) {
+	public CandidatController(CandidatService candidatService, EmployeurService employeurService,
+			HttpServletRequest request) {
 		super();
 		this.candidatService = candidatService;
 		this.employeurService = employeurService;
@@ -77,13 +76,27 @@ public class CandidatController {
 
 	@PostMapping("/save")
 	public Candidat createCandidat(@RequestBody Candidat candidat) throws IOException {
-
+		byte[] fileContent = null;
+		byte[] fileContentCV;
 		if (candidat.getId() != null) {
 			log.info("A new candidat cannot already have an ID", "userManagement", "idexists");
 		} else if (!employeurService.findOneByEmail(candidat.getEmail().toLowerCase())
 				|| !candidatService.findOneByEmail(candidat.getEmail().toLowerCase())) {
 			log.info("A new candidat cannot already have an Email : {}", candidat.getEmail());
 		} else {
+			log.info("A candidat : {}", candidat);
+//			if (candidat.getPiece_jointePath() != null) {
+//				fileContentCV = FileUtils.readFileToByteArray(new File(candidat.getPiece_jointePath()));
+//				String encodedStringCV = Base64.getEncoder().encodeToString(fileContentCV);
+//				candidat.setPiece_jointe(encodedStringCV);
+//
+//			}
+//			if (candidat.getPhoto() != null) {
+//				fileContent = FileUtils.readFileToByteArray(new File(candidat.getPhotoPath()));
+//				String encodedString = Base64.getEncoder().encodeToString(fileContent);
+//				candidat.setPhoto(encodedString);
+//			}
+
 			candidat.setRole(Role.CANDIDAT.name());
 			Candidat newCandidat = candidatService.save(candidat);
 			return newCandidat;
@@ -107,49 +120,26 @@ public class CandidatController {
 	}
 
 	@PostMapping(value = "/uploadfile")
-	public String handleFileUpload(@RequestParam("file") MultipartFile file,
+	public boolean handleFileUpload(@RequestParam("file") MultipartFile file,
 			@RequestParam(value = "mail", required = true) String email,
 			@RequestParam(value = "id", required = false) String id) {
-		log.info("getOriginalFilename = {}", file.getOriginalFilename());
-		log.info("mail = {}", email);
+		log.info("A new save file :{}, with email :{} ,and id :{} : {}",file.getOriginalFilename(),email,id);
 
 		if (!file.isEmpty()) {
-			log.info("getOriginalFilename = {}", file.getOriginalFilename());
-
 			try {
-				String uploadsDir = "image";
-				String realPathtoUploads = request.getServletContext().getRealPath(uploadsDir);
-				realPathtoUploads += "\\" +"Candidat";
-				if (!new File(realPathtoUploads).exists()) {
-					new File(realPathtoUploads).mkdir();
-				}
-				String folder = realPathtoUploads + "\\" + email;
-
-				log.info("realPathtoUploads = {}", realPathtoUploads);
-				if (!new File(folder).exists()) {
-					log.info("folder = {}", folder);
-
-					new File(folder).mkdir();
-
-				}
-				String orgName = file.getOriginalFilename();
-				String filePath = folder + "\\" + orgName;
-				log.info("filePath = {}", filePath);
-
-				File dest = new File(filePath);
-				file.transferTo(dest);
-				log.info("dest.getAbsolutePath( = {}", dest.getAbsolutePath());
-				Candidat candidat =candidatService.getOne(Long.valueOf(id));
-				candidat.setPhoto(dest.getAbsolutePath());
+				Candidat candidat = candidatService.getOne(Long.valueOf(id));
+				candidat.setPhoto(file.getBytes());
 				candidatService.save(candidat);
-				return dest.getAbsolutePath();
+				log.info("A canddd: {}",candidat);
+
+				return true;
 			} catch (Exception e) {
-				return null;
+				e.printStackTrace();
+				return false;
 			}
 		}
-		return null;
+		return false;
 	}
-	
 
 
 }

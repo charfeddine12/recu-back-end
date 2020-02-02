@@ -1,6 +1,5 @@
 package com.recrutement.entity;
 
-import java.io.File;
 import java.util.Date;
 import java.util.List;
 
@@ -9,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
@@ -44,8 +44,9 @@ public class Employeur extends Utilisateur {
 	private String type;
 	@Column
 	private String fondation;
+    @Lob
 	@Column
-	private File photo;
+	private byte[] photo;
 	@Column
 	private String pays;
 	@OneToMany
@@ -63,7 +64,7 @@ public class Employeur extends Utilisateur {
 	}
 
 	public Employeur(Long id, String nom, String presentation, String site, String adresse, String taille, String type,
-			String fondation, File photo, String pays) {
+			String fondation, byte[] photo, String pays) {
 		super();
 		this.id = id;
 		this.nom = nom;
@@ -78,7 +79,7 @@ public class Employeur extends Utilisateur {
 	}
 
 	public Employeur(Long id, String nom, String presentation, String site, String adresse, String taille, String type,
-			String fondation, File photo, String pays, List<Offre> offres) {
+			String fondation, byte[] photo, String pays, List<Offre> offres) {
 		super();
 		this.id = id;
 		this.nom = nom;
@@ -157,11 +158,11 @@ public class Employeur extends Utilisateur {
 		this.fondation = fondation;
 	}
 
-	public File getPhoto() {
+	public byte[] getPhoto() {
 		return photo;
 	}
 
-	public void setPhoto(File photo) {
+	public void setPhoto(byte[] photo) {
 		this.photo = photo;
 	}
 
