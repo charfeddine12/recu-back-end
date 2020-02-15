@@ -37,6 +37,8 @@ public class OffreController {
 
 	@GetMapping("/get")
 	public List<Offre> getAllOffres() {
+		log.info("REST request to get all Offre : {}");
+
 		final List<Offre> listOffre = offreService.getAll();
 		return listOffre;
 	}
