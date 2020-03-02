@@ -1,5 +1,6 @@
 package com.recrutement.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,8 +39,9 @@ public class EmployeurController {
 
 	@Autowired
 	private HttpServletRequest request;
-	
-	public EmployeurController(EmployeurService employeurService, CandidatService candidatService,HttpServletRequest request) {
+
+	public EmployeurController(EmployeurService employeurService, CandidatService candidatService,
+			HttpServletRequest request) {
 		super();
 		this.employeurService = employeurService;
 		this.candidatService = candidatService;
@@ -103,12 +105,12 @@ public class EmployeurController {
 		return null;
 
 	}
-	
+
 	@PostMapping(value = "/uploadfile")
 	public String handleFileUpload(@RequestParam("file") MultipartFile file,
 			@RequestParam(value = "mail", required = true) String email,
 			@RequestParam(value = "id", required = false) String id) {
-		log.info("A new save file :{}, with email :{} ,and id :{} : {}",file.getOriginalFilename(),email,id);
+		log.info("A new save file :{}, with email :{} ,and id :{} : {}", file.getOriginalFilename(), email, id);
 
 		if (!file.isEmpty()) {
 			try {
@@ -123,4 +125,15 @@ public class EmployeurController {
 		}
 		return null;
 	}
+
+	@GetMapping("/getByLogin/{login}")
+	public Employeur getByLoginEmployeur(@PathVariable String login) {
+		log.info("REST request to get Employeur : {}", login);
+		Employeur employeur = null;
+		if (login != null)
+			employeur = employeurService.findEmployeurByEmail(login);
+		return employeur;
+	}
+
+	
 }

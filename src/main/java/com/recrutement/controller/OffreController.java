@@ -1,7 +1,11 @@
 package com.recrutement.controller;
 
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,15 +18,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.recrutement.entity.Candidat;
+import com.recrutement.entity.Employeur;
 import com.recrutement.entity.Offre;
+import com.recrutement.services.CandidatService;
 import com.recrutement.services.OffreService;
 
 @RestController
 @RequestMapping("/api/offre")
-@CrossOrigin(origins = "http://localhost:4200")
-
+@CrossOrigin(origins = "*")
 public class OffreController {
 
 	private final Logger log = LoggerFactory.getLogger(OffreController.class);
@@ -30,13 +37,19 @@ public class OffreController {
 	@Autowired
 	OffreService offreService;
 
-	public OffreController(OffreService offreService) {
+	@Autowired
+	CandidatService candidatService;
+
+	public OffreController(OffreService offreService, CandidatService candidatService) {
 		super();
 		this.offreService = offreService;
+		this.candidatService = candidatService;
 	}
 
 	@GetMapping("/get")
 	public List<Offre> getAllOffres() {
+		log.info("REST request to get all Offre : {}");
+
 		final List<Offre> listOffre = offreService.getAll();
 		return listOffre;
 	}
@@ -84,4 +97,34 @@ public class OffreController {
 		return null;
 
 	}
+
+	@PostMapping("/postuler")
+	public Offre postuler(@RequestParam("id") String id, @RequestParam("login") String login)
+			throws URISyntaxException {
+		log.info("REST request candidat with id:{} want postuler in  Offre : {}", login, id);
+
+		if (id != null) {
+			offreService.postuler(id, login);
+		}
+		return null;
+	}
+
+	@GetMapping("/getMyOffres/{id}")
+	public List<Offre> getMyOffres(@PathVariable String id) {
+		log.info("REST request to get Employeur : {}", id);
+		List<Offre> offres = new ArrayList<Offre>();
+		if (id != null)
+			offres = offreService.findOffreByEmployeurId(id);
+		return offres;
+	}
+
+	@SuppressWarnings("unchecked")
+	@GetMapping("/getCandidatures/{id}")
+	public List<Candidat> getCandidatures(@PathVariable String id) {
+		log.info("REST request to get Candidat : {}", id);
+		List<Candidat> candidats = new ArrayList<>();
+
+		return candidats;
+	}
+
 }

@@ -21,7 +21,7 @@ import com.recrutement.services.DomaineService;
 
 @RestController
 @RequestMapping("/api/domaine")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 
 public class DomaineController {
 

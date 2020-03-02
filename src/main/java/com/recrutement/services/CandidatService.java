@@ -11,4 +11,5 @@ public interface CandidatService {
 	Candidat save(Candidat candidat);
 	boolean delete(Long id);
 	boolean findOneByEmail(String email);
+	Candidat findCandidatByEmail(String login);
 }

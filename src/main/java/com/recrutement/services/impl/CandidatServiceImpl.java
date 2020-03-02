@@ -60,4 +60,14 @@ public class CandidatServiceImpl implements CandidatService {
 		return false;
 
 	}
+
+	@Override
+	public Candidat findCandidatByEmail(String login) {
+		if (login != null) {
+			return candidatRepository.findByEmail(login);
+		}
+		return null;
+
+	}
+
 }

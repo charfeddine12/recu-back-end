@@ -10,4 +10,6 @@ public interface OffreService {
 	Offre getOne(Long id);
 	Offre save(Offre offre);
 	boolean delete(Long id);
+	boolean postuler(String id, String login);
+	List<Offre> findOffreByEmployeurId(String id);
 }

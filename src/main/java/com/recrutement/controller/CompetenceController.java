@@ -21,8 +21,7 @@ import com.recrutement.services.CompetenceService;
 
 @RestController
 @RequestMapping("/api/competence")
-@CrossOrigin(origins = "http://localhost:4200")
-
+@CrossOrigin(origins = "*")
 public class CompetenceController {
 
 	private final Logger log = LoggerFactory.getLogger(CompetenceController.class);

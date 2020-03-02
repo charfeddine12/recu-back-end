@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -58,6 +59,16 @@ public class Offre implements Serializable {
 	@JoinTable(name = "offre_langues", joinColumns = @JoinColumn(name = "offre_id"), inverseJoinColumns = @JoinColumn(name = "langues_id"))
 	private List<Langue> langues;
 
+	@ManyToMany
+	@JoinTable(name = "offre_competences", joinColumns = @JoinColumn(name = "offre_id"), inverseJoinColumns = @JoinColumn(name = "competences_id"))
+	private List<Competence> competences;
+	
+	@OneToOne
+	private Poste poste;
+	
+	@ManyToOne
+	private Employeur employeur;
+	
 	public Offre() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -77,7 +88,8 @@ public class Offre implements Serializable {
 	}
 
 	public Offre(Long id, String niveauEtude, String fonction, String horaire, String salaire, String niveauExperience,
-			Date dateAjout, Date dateModif, Domaine domaine, List<Langue> langues) {
+			Date dateAjout, Date dateModif, Domaine domaine, List<Langue> langues, List<Competence> competences,
+			Poste poste, Employeur employeur) {
 		super();
 		this.id = id;
 		this.niveauEtude = niveauEtude;
@@ -89,6 +101,9 @@ public class Offre implements Serializable {
 		this.dateModif = dateModif;
 		this.domaine = domaine;
 		this.langues = langues;
+		this.competences = competences;
+		this.poste = poste;
+		this.employeur = employeur;
 	}
 
 	public Long getId() {
@@ -171,11 +186,41 @@ public class Offre implements Serializable {
 		this.langues = langues;
 	}
 
+	
+	public Poste getPoste() {
+		return poste;
+	}
+
+	public void setPoste(Poste poste) {
+		this.poste = poste;
+	}
+
+	
+	public Employeur getEmployeur() {
+		return employeur;
+	}
+
+	public void setEmployeur(Employeur employeur) {
+		this.employeur = employeur;
+	}
+
+	
+	public List<Competence> getCompetences() {
+		return competences;
+	}
+
+	public void setCompetences(List<Competence> competences) {
+		this.competences = competences;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Offre [id=" + id + ", niveauEtude=" + niveauEtude + ", fonction=" + fonction + ", horaire=" + horaire
 				+ ", salaire=" + salaire + ", niveauExperience=" + niveauExperience + ", dateAjout=" + dateAjout
-				+ ", dateModif=" + dateModif + ", domaine=" + domaine + ", langues=" + langues + "]";
+				+ ", dateModif=" + dateModif +"]";
 	}
+
+
 
 }
