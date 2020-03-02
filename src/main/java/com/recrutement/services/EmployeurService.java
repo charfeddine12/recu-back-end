@@ -3,6 +3,7 @@ package com.recrutement.services;
 import java.util.List;
 
 import com.recrutement.entity.Employeur;
+import com.recrutement.entity.Offre;
 
 public interface EmployeurService {
 
@@ -11,4 +12,6 @@ public interface EmployeurService {
 	Employeur save(Employeur employeur);
 	boolean delete(Long id);
 	boolean findOneByEmail(String lowerCase);
+	Employeur findEmployeurByEmail(String login);
+	List<Offre> findOffreByEmployeurId(Long valueOf);
 }

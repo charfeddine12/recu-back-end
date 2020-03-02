@@ -13,7 +13,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -69,7 +68,6 @@ public class Offre implements Serializable {
 	
 	@ManyToOne
 	private Employeur employeur;
-	
 	
 	public Offre() {
 		super();
@@ -215,13 +213,14 @@ public class Offre implements Serializable {
 		this.competences = competences;
 	}
 
+
 	@Override
 	public String toString() {
 		return "Offre [id=" + id + ", niveauEtude=" + niveauEtude + ", fonction=" + fonction + ", horaire=" + horaire
 				+ ", salaire=" + salaire + ", niveauExperience=" + niveauExperience + ", dateAjout=" + dateAjout
-				+ ", dateModif=" + dateModif + ", domaine=" + domaine + ", langues=" + langues + ", competences="
-				+ competences + ", poste=" + poste + ", employeur=" + employeur + "]";
+				+ ", dateModif=" + dateModif +"]";
 	}
+
 
 
 }

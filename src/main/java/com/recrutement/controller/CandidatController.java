@@ -38,6 +38,7 @@ public class CandidatController {
 	@Autowired
 	EmployeurService employeurService;
 
+	@SuppressWarnings("unused")
 	@Autowired
 	private HttpServletRequest request;
 
@@ -64,7 +65,15 @@ public class CandidatController {
 			candidat = candidatService.getOne(id);
 		return candidat;
 	}
-
+	@GetMapping("/getByLogin/{login}")
+	public Candidat getByLoginCandidat(@PathVariable String login) {
+		log.info("REST request to get Candidat : {}", login);
+		Candidat candidat = null;
+		if (login != null)
+			candidat = candidatService.findCandidatByEmail(login);
+		return candidat;
+	}
+	
 	@DeleteMapping("/delete/{id}")
 	public boolean deleteCandidat(@PathVariable Long id) {
 		log.info("REST request to delete candidat: {}", id);
