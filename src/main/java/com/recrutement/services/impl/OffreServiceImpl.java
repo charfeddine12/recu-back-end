@@ -80,11 +80,5 @@ public class OffreServiceImpl implements OffreService {
 		return false;
 	}
 
-	@Override
-	public List<Offre> findOffreByEmployeurId(String id) {
-		if (id != null) {
-			return employeurService.findOffreByEmployeurId(Long.valueOf(id));
-		}
-		return null;
-	}
+
 }

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -55,7 +56,7 @@ public class Offre implements Serializable {
 	@ManyToOne
 	private Domaine domaine;
 
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "offre_langues", joinColumns = @JoinColumn(name = "offre_id"), inverseJoinColumns = @JoinColumn(name = "langues_id"))
 	private List<Langue> langues;
 
@@ -63,11 +64,12 @@ public class Offre implements Serializable {
 	@JoinTable(name = "offre_competences", joinColumns = @JoinColumn(name = "offre_id"), inverseJoinColumns = @JoinColumn(name = "competences_id"))
 	private List<Competence> competences;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private Poste poste;
 	
-	@ManyToOne
-	private Employeur employeur;
+	@ManyToMany
+	@JoinTable(name = "offre_employeurs", joinColumns = @JoinColumn(name = "offre_id"), inverseJoinColumns = @JoinColumn(name = "employeurs_id"))
+	private List<Employeur> employeur;
 	
 	public Offre() {
 		super();
@@ -89,7 +91,7 @@ public class Offre implements Serializable {
 
 	public Offre(Long id, String niveauEtude, String fonction, String horaire, String salaire, String niveauExperience,
 			Date dateAjout, Date dateModif, Domaine domaine, List<Langue> langues, List<Competence> competences,
-			Poste poste, Employeur employeur) {
+			Poste poste, List<Employeur> employeur) {
 		super();
 		this.id = id;
 		this.niveauEtude = niveauEtude;
@@ -186,25 +188,6 @@ public class Offre implements Serializable {
 		this.langues = langues;
 	}
 
-	
-	public Poste getPoste() {
-		return poste;
-	}
-
-	public void setPoste(Poste poste) {
-		this.poste = poste;
-	}
-
-	
-	public Employeur getEmployeur() {
-		return employeur;
-	}
-
-	public void setEmployeur(Employeur employeur) {
-		this.employeur = employeur;
-	}
-
-	
 	public List<Competence> getCompetences() {
 		return competences;
 	}
@@ -213,14 +196,29 @@ public class Offre implements Serializable {
 		this.competences = competences;
 	}
 
+	public Poste getPoste() {
+		return poste;
+	}
+
+	public void setPoste(Poste poste) {
+		this.poste = poste;
+	}
+
+	public List<Employeur> getEmployeur() {
+		return employeur;
+	}
+
+	public void setEmployeur(List<Employeur> employeur) {
+		this.employeur = employeur;
+	}
 
 	@Override
 	public String toString() {
 		return "Offre [id=" + id + ", niveauEtude=" + niveauEtude + ", fonction=" + fonction + ", horaire=" + horaire
 				+ ", salaire=" + salaire + ", niveauExperience=" + niveauExperience + ", dateAjout=" + dateAjout
-				+ ", dateModif=" + dateModif +"]";
+				+ ", dateModif=" + dateModif + ", domaine=" + domaine + ", langues=" + langues + ", competences="
+				+ competences + ", poste=" + poste + "]";
 	}
-
 
 
 }
