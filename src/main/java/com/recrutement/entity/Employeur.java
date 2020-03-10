@@ -1,19 +1,13 @@
 package com.recrutement.entity;
 
-import java.util.Date;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Email;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -49,18 +43,9 @@ public class Employeur extends Utilisateur {
 	private byte[] photo;
 	@Column
 	private String pays;
-	@OneToMany
-	@JsonBackReference
-	List<Offre> offres;
 
 	public Employeur() {
 		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public Employeur(Long id, Email email, Role role, Date dateAjout, Date dateModif) {
-		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Employeur(Long id, String nom, String presentation, String site, String adresse, String taille, String type,
@@ -76,22 +61,6 @@ public class Employeur extends Utilisateur {
 		this.fondation = fondation;
 		this.photo = photo;
 		this.pays = pays;
-	}
-
-	public Employeur(Long id, String nom, String presentation, String site, String adresse, String taille, String type,
-			String fondation, byte[] photo, String pays, List<Offre> offres) {
-		super();
-		this.id = id;
-		this.nom = nom;
-		this.presentation = presentation;
-		this.site = site;
-		this.adresse = adresse;
-		this.taille = taille;
-		this.type = type;
-		this.fondation = fondation;
-		this.photo = photo;
-		this.pays = pays;
-		this.offres = offres;
 	}
 
 	public Long getId() {
@@ -174,19 +143,11 @@ public class Employeur extends Utilisateur {
 		this.pays = pays;
 	}
 
-	public List<Offre> getOffres() {
-		return offres;
-	}
-
-	public void setOffres(List<Offre> offres) {
-		this.offres = offres;
-	}
-
 	@Override
 	public String toString() {
 		return "Employeur [id=" + id + ", nom=" + nom + ", presentation=" + presentation + ", site=" + site
 				+ ", adresse=" + adresse + ", taille=" + taille + ", type=" + type + ", fondation=" + fondation
-				+ ", photo=" + photo + ", pays=" + pays + ", offres=" + offres + "]";
+				+ ", photo=" + photo + ", pays=" + pays + "]";
 	}
 
 }

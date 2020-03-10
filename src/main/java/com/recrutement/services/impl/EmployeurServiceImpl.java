@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.recrutement.entity.Employeur;
-import com.recrutement.entity.Offre;
 import com.recrutement.repository.EmployeurRepositroy;
 import com.recrutement.services.EmployeurService;
 
@@ -49,6 +48,7 @@ public class EmployeurServiceImpl implements EmployeurService {
 			return false;
 		return true;
 	}
+
 	@Override
 	public boolean findOneByEmail(String email) {
 		if (email != null) {
@@ -63,14 +63,6 @@ public class EmployeurServiceImpl implements EmployeurService {
 	public Employeur findEmployeurByEmail(String login) {
 		if (login != null) {
 			return employeurRepository.findByEmail(login);
-		}
-		return null;
-	}
-
-	@Override
-	public List<Offre> findOffreByEmployeurId(Long id) {
-		if (id != null) {
-			return employeurRepository.findOffreByEmployeurId(id);
 		}
 		return null;
 	}

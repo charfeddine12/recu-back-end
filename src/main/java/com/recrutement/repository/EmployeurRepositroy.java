@@ -18,8 +18,6 @@ public interface EmployeurRepositroy extends JpaRepository<Employeur, Long> {
 	@Query("select employeur from Employeur employeur where employeur.email = :email and employeur.password = :password")
 	Employeur authentication(@Param("email")String email, @Param("password")String password);
 	
-	//@Query(value="select * from employeur_offres  where employeur_id :=id",nativeQuery = true)
-	@Query("select employeur.offres from Employeur employeur where employeur.id=:id")
-	List<Offre> findOffreByEmployeurId(@Param("id") Long id);
+
 
 }

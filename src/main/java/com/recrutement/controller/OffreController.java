@@ -4,6 +4,7 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -25,6 +26,7 @@ import com.recrutement.entity.Candidat;
 import com.recrutement.entity.Employeur;
 import com.recrutement.entity.Offre;
 import com.recrutement.services.CandidatService;
+import com.recrutement.services.EmployeurService;
 import com.recrutement.services.OffreService;
 
 @RestController
@@ -39,6 +41,9 @@ public class OffreController {
 
 	@Autowired
 	CandidatService candidatService;
+
+	@Autowired
+	EmployeurService employeurService;
 
 	public OffreController(OffreService offreService, CandidatService candidatService) {
 		super();
@@ -79,7 +84,11 @@ public class OffreController {
 		if (offre.getId() != null) {
 			log.info("A new Offre cannot already have an ID idexists");
 		} else {
+			offre.setLangues(offre.getLangues());
+
 			Offre newOffre = offreService.save(offre);
+			List<Offre> offres = new ArrayList<Offre>();
+			offres.add(newOffre);
 			return newOffre;
 		}
 		return null;
@@ -113,18 +122,38 @@ public class OffreController {
 	public List<Offre> getMyOffres(@PathVariable String id) {
 		log.info("REST request to get Employeur : {}", id);
 		List<Offre> offres = new ArrayList<Offre>();
+		List<Offre> offresFiltred = new ArrayList<>();
 		if (id != null)
-			offres = offreService.findOffreByEmployeurId(id);
-		return offres;
+			offres = offreService.getAll();
+		for (Offre offre : offres) {
+			for (Employeur emp : offre.getEmployeur()) {
+				if (emp.getId().equals(Long.valueOf(id))) {
+					offresFiltred.add(offre);
+				}
+			}
+		}
+		log.info("List :{}", offresFiltred.toString());
+
+		return offresFiltred;
 	}
 
-	@SuppressWarnings("unchecked")
 	@GetMapping("/getCandidatures/{id}")
 	public List<Candidat> getCandidatures(@PathVariable String id) {
-		log.info("REST request to get Candidat : {}", id);
-		List<Candidat> candidats = new ArrayList<>();
+		log.info("REST request to get getCandidatures by id offre : {}", id);
+		List<Candidat> candidats = candidatService.getAll();
+		List<Candidat> candidatsFiltred = new ArrayList<>();
+		for (Candidat cand : candidats) {
+			for (Offre offre : cand.getOffres()) {
+				log.info("offre id :{}", offre.getId());
 
-		return candidats;
+				if (offre.getId().equals(Long.valueOf(id))) {
+					candidatsFiltred.add(cand);
+				}
+			}
+		}
+		log.info("size :{}", candidatsFiltred.size());
+
+		return candidatsFiltred;
 	}
 
 }

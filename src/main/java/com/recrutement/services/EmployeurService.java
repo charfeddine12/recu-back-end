@@ -13,5 +13,4 @@ public interface EmployeurService {
 	boolean delete(Long id);
 	boolean findOneByEmail(String lowerCase);
 	Employeur findEmployeurByEmail(String login);
-	List<Offre> findOffreByEmployeurId(Long valueOf);
 }
