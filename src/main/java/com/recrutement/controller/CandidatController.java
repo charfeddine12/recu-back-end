@@ -92,8 +92,7 @@ public class CandidatController {
 				|| !candidatService.findOneByEmail(candidat.getEmail().toLowerCase())) {
 			log.info("A new candidat cannot already have an Email : {}", candidat.getEmail());
 		} else {
-			log.info("A candidat : {}", candidat);
-			candidat.setRole(Role.CANDIDAT.name());
+			candidat.setRole(Role.CANDIDAT);
 			Candidat newCandidat = candidatService.save(candidat);
 			return newCandidat;
 		}

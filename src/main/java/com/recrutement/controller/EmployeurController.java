@@ -1,6 +1,7 @@
 package com.recrutement.controller;
 
 import java.util.ArrayList;
+import java.io.File;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -77,16 +78,14 @@ public class EmployeurController {
 		log.info("REST request to save Employeur : {}", employeur);
 		log.info("A nddddddd  : {}", employeurService.findOneByEmail(employeur.getEmail().toLowerCase()));
 		log.info("A ndddcxcxcxc  : {} ", candidatService.findOneByEmail(employeur.getEmail().toLowerCase()));
-
 		if (employeur.getId() != null) {
 			log.info("A new employeur cannot already have an ID idexists");
 		} else if (!employeurService.findOneByEmail(employeur.getEmail().toLowerCase())
 				|| !candidatService.findOneByEmail(employeur.getEmail().toLowerCase())) {
 			log.info("A new Employeur cannot already have an Email : {}", employeur.getEmail());
-
 			throw new Exception("A new Employeur cannot already have an Email");
 		} else {
-			employeur.setRole(Role.EMPLOYEUR.name());
+			employeur.setRole(Role.EMPLOYEUR);
 			Employeur newEmployeur = employeurService.save(employeur);
 			return newEmployeur;
 		}

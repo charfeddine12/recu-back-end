@@ -5,6 +5,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,13 +24,13 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Table
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-
 public class Utilisateur implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column
@@ -37,7 +39,8 @@ public class Utilisateur implements Serializable {
 	@Email
 	private String email;
 	@Column
-	private String role;
+	@Enumerated(EnumType.STRING)
+	private Role role;
 	@CreationTimestamp
 	@Column
 	private Date dateAjout;
@@ -53,7 +56,7 @@ public class Utilisateur implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Utilisateur(Long id, @Email String email, String role, Date dateAjout, Date dateModif, String password) {
+	public Utilisateur(Long id, @Email String email, Role role, Date dateAjout, Date dateModif, String password) {
 		super();
 		this.id = id;
 		this.email = email;
@@ -79,11 +82,11 @@ public class Utilisateur implements Serializable {
 		this.email = email;
 	}
 
-	public String getRole() {
+	public Role getRole() {
 		return role;
 	}
 
-	public void setRole(String role) {
+	public void setRole(Role role) {
 		this.role = role;
 	}
 
