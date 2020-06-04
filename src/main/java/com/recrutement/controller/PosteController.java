@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.recrutement.entity.Poste;
+import com.recrutement.entities.Poste;
 import com.recrutement.services.PosteService;
 
 @RestController

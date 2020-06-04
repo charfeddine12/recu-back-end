@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.recrutement.entity.Utilisateur;
+import com.recrutement.entities.Utilisateur;
 
 @Repository
 public interface UtilisateurRepositroy extends JpaRepository<Utilisateur, Long> {

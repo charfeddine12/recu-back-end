@@ -1,4 +1,4 @@
-package com.recrutement.entity;
+package com.recrutement.entities;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -36,29 +36,32 @@ public class Offre implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column
 	private Long id;
+	
 	@Column
 	private String niveauEtude;
+	
 	@Column
 	private String fonction;
+	
 	@Column
 	private String horaire;
+	
 	@Column
 	private String salaire;
+	
 	@Column(name = "niveauExperience")
 	private String niveauExperience;
+	
 	@CreationTimestamp
 	@Column
 	private Date dateAjout;
+	
 	@UpdateTimestamp
 	@Column
 	private Date dateModif;
 
 	@ManyToOne
 	private Domaine domaine;
-
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "offre_langues", joinColumns = @JoinColumn(name = "offre_id"), inverseJoinColumns = @JoinColumn(name = "langues_id"))
-	private List<Langue> langues;
 
 	@ManyToMany
 	@JoinTable(name = "offre_competences", joinColumns = @JoinColumn(name = "offre_id"), inverseJoinColumns = @JoinColumn(name = "competences_id"))
@@ -67,13 +70,11 @@ public class Offre implements Serializable {
 	@OneToOne(cascade = CascadeType.ALL)
 	private Poste poste;
 	
-	@ManyToMany
-	@JoinTable(name = "offre_employeurs", joinColumns = @JoinColumn(name = "offre_id"), inverseJoinColumns = @JoinColumn(name = "employeurs_id"))
-	private List<Employeur> employeur;
+	@ManyToOne
+	private Employeur employeur;
 	
 	public Offre() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Offre(Long id, String niveauEtude, String fonction, String horaire, String salaire, String niveauExperience,
@@ -90,8 +91,8 @@ public class Offre implements Serializable {
 	}
 
 	public Offre(Long id, String niveauEtude, String fonction, String horaire, String salaire, String niveauExperience,
-			Date dateAjout, Date dateModif, Domaine domaine, List<Langue> langues, List<Competence> competences,
-			Poste poste, List<Employeur> employeur) {
+			Date dateAjout, Date dateModif, Domaine domaine, List<Competence> competences,
+			Poste poste, Employeur employeur) {
 		super();
 		this.id = id;
 		this.niveauEtude = niveauEtude;
@@ -102,7 +103,6 @@ public class Offre implements Serializable {
 		this.dateAjout = dateAjout;
 		this.dateModif = dateModif;
 		this.domaine = domaine;
-		this.langues = langues;
 		this.competences = competences;
 		this.poste = poste;
 		this.employeur = employeur;
@@ -180,14 +180,6 @@ public class Offre implements Serializable {
 		this.domaine = domaine;
 	}
 
-	public List<Langue> getLangues() {
-		return langues;
-	}
-
-	public void setLangues(List<Langue> langues) {
-		this.langues = langues;
-	}
-
 	public List<Competence> getCompetences() {
 		return competences;
 	}
@@ -204,21 +196,24 @@ public class Offre implements Serializable {
 		this.poste = poste;
 	}
 
-	public List<Employeur> getEmployeur() {
+	public Employeur getEmployeur() {
 		return employeur;
 	}
 
-	public void setEmployeur(List<Employeur> employeur) {
+	public void setEmployeur(Employeur employeur) {
 		this.employeur = employeur;
 	}
+	
 
 	@Override
 	public String toString() {
 		return "Offre [id=" + id + ", niveauEtude=" + niveauEtude + ", fonction=" + fonction + ", horaire=" + horaire
 				+ ", salaire=" + salaire + ", niveauExperience=" + niveauExperience + ", dateAjout=" + dateAjout
-				+ ", dateModif=" + dateModif + ", domaine=" + domaine + ", langues=" + langues + ", competences="
-				+ competences + ", poste=" + poste + "]";
+				+ ", dateModif=" + dateModif + ", domaine=" + domaine + ", competences="
+				+ competences + ", poste=" + poste + ", employeur=" + employeur + "]";
 	}
+
+
 
 
 }

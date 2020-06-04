@@ -1,7 +1,5 @@
 package com.recrutement.controller;
 
-import java.util.ArrayList;
-import java.io.File;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,12 +15,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
-import com.recrutement.entity.Employeur;
-import com.recrutement.entity.Role;
+import com.recrutement.entities.Employeur;
+import com.recrutement.entity.types.Role;
 import com.recrutement.services.CandidatService;
 import com.recrutement.services.EmployeurService;
 
@@ -38,15 +34,11 @@ public class EmployeurController {
 	@Autowired
 	CandidatService candidatService;
 
-	@Autowired
-	private HttpServletRequest request;
-
 	public EmployeurController(EmployeurService employeurService, CandidatService candidatService,
 			HttpServletRequest request) {
 		super();
 		this.employeurService = employeurService;
 		this.candidatService = candidatService;
-		this.request = request;
 	}
 
 	@GetMapping("/get")
@@ -103,26 +95,6 @@ public class EmployeurController {
 			}
 		return null;
 
-	}
-
-	@PostMapping(value = "/uploadfile")
-	public String handleFileUpload(@RequestParam("file") MultipartFile file,
-			@RequestParam(value = "mail", required = true) String email,
-			@RequestParam(value = "id", required = false) String id) {
-		log.info("A new save file :{}, with email :{} ,and id :{} : {}", file.getOriginalFilename(), email, id);
-
-		if (!file.isEmpty()) {
-			try {
-				Employeur employeur = employeurService.getOne(Long.valueOf(id));
-				employeur.setPhoto(file.getBytes());
-				employeurService.save(employeur);
-				return "OK";
-			} catch (Exception e) {
-				e.printStackTrace();
-				return null;
-			}
-		}
-		return null;
 	}
 
 	@GetMapping("/getByLogin/{login}")

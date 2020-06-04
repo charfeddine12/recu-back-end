@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.recrutement.entity.Utilisateur;
+import com.recrutement.entities.Utilisateur;
 import com.recrutement.services.UtilisateurService;
 import com.recrutement.utilties.CodeResponse;
 

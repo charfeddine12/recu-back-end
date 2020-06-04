@@ -1,4 +1,4 @@
-package com.recrutement.entity;
+package com.recrutement.entities;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -18,18 +18,23 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-public class Domaine implements Serializable{
+
+public class Poste implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column
 	private Long id;
 	@Column
 	private String intitule;
+	@Column
+	private String description;
+
 	@CreationTimestamp
 	@Column
 	private Date dateAjout;
@@ -37,15 +42,16 @@ public class Domaine implements Serializable{
 	@Column
 	private Date dateModif;
 
-	
-	public Domaine() {
+	public Poste() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Domaine(Long id, String intitule, Date dateAjout, Date dateModif) {
+
+	public Poste(Long id, String intitule, String description, Date dateAjout, Date dateModif) {
 		super();
 		this.id = id;
 		this.intitule = intitule;
+		this.description = description;
 		this.dateAjout = dateAjout;
 		this.dateModif = dateModif;
 	}
@@ -53,33 +59,47 @@ public class Domaine implements Serializable{
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getIntitule() {
 		return intitule;
 	}
+
 	public void setIntitule(String intitule) {
 		this.intitule = intitule;
 	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	public Date getDateAjout() {
 		return dateAjout;
 	}
+
 	public void setDateAjout(Date dateAjout) {
 		this.dateAjout = dateAjout;
 	}
+
 	public Date getDateModif() {
 		return dateModif;
 	}
+
 	public void setDateModif(Date dateModif) {
 		this.dateModif = dateModif;
 	}
-	
 
 	@Override
 	public String toString() {
-		return "Domaine [id=" + id + ", intitule=" + intitule + ", dateAjout=" + dateAjout + ", dateModif=" + dateModif
-				+  "]";
+		return "Poste [id=" + id + ", intitule=" + intitule + ", description=" + description + ", dateAjout="
+				+ dateAjout + ", dateModif=" + dateModif + "]";
 	}
 
 }

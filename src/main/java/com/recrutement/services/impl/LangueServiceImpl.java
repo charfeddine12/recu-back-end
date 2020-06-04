@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.recrutement.entity.Langue;
+import com.recrutement.entities.Langue;
 import com.recrutement.repository.LangueRepositroy;
 import com.recrutement.services.LangueService;
 

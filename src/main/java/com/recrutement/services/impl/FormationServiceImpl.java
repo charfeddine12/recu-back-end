@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.recrutement.entity.Formation;
+import com.recrutement.entities.Formation;
 import com.recrutement.repository.FormationRepositroy;
 import com.recrutement.services.FormationService;
 

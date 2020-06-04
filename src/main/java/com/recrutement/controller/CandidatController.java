@@ -16,12 +16,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
-import com.recrutement.entity.Candidat;
-import com.recrutement.entity.Role;
+import com.recrutement.entities.Candidat;
+import com.recrutement.entity.types.Role;
 import com.recrutement.services.CandidatService;
 import com.recrutement.services.EmployeurService;
 
@@ -112,35 +110,6 @@ public class CandidatController {
 			return updatedCandidat;
 		}
 
-	}
-
-	@PostMapping(value = "/uploadfile")
-	public boolean handleFileUpload(@RequestParam("file") MultipartFile file,
-			@RequestParam(value = "mail", required = true) String email,
-			@RequestParam(value = "id", required = false) String id,
-			@RequestParam(value = "type", required = false) String type) {
-		log.info("A new save file :{}, with email :{} ,and id :{} : {}",file.getOriginalFilename(),email,id);
-
-		if (!file.isEmpty()) {
-			try {
-				Candidat candidat = candidatService.getOne(Long.valueOf(id));
-				if(type.equals("PHOTO")) {
-					candidat.setPhoto(file.getBytes());
-					candidatService.save(candidat);	
-				}else if (type.equals("CV")) {
-					candidat.setPiece_jointe(file.getBytes());
-					candidatService.save(candidat);	
-				}
-
-				log.info("A canddd: {}",candidat);
-
-				return true;
-			} catch (Exception e) {
-				e.printStackTrace();
-				return false;
-			}
-		}
-		return false;
 	}
 
 	

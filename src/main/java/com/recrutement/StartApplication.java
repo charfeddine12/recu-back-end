@@ -9,8 +9,8 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 
-import com.recrutement.entity.Role;
-import com.recrutement.entity.Utilisateur;
+import com.recrutement.entities.Utilisateur;
+import com.recrutement.entity.types.Role;
 import com.recrutement.services.UtilisateurService;
 
 @SpringBootApplication

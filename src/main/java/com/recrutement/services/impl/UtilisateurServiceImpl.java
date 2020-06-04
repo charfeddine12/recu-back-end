@@ -2,14 +2,12 @@ package com.recrutement.services.impl;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.recrutement.entity.Candidat;
-import com.recrutement.entity.Employeur;
-import com.recrutement.entity.Utilisateur;
+import com.recrutement.entities.Candidat;
+import com.recrutement.entities.Employeur;
+import com.recrutement.entities.Utilisateur;
 import com.recrutement.repository.CandidatRepositroy;
 import com.recrutement.repository.EmployeurRepositroy;
 import com.recrutement.repository.UtilisateurRepositroy;
@@ -27,16 +25,12 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 	@Autowired
 	EmployeurRepositroy employeurRepositroy;
 
-	@Autowired
-	private HttpServletRequest request;
-
 	public UtilisateurServiceImpl(UtilisateurRepositroy utilisateurRepositroy, CandidatRepositroy candidatRepositroy,
-			EmployeurRepositroy employeurRepositroy, HttpServletRequest request) {
+			EmployeurRepositroy employeurRepositroy) {
 		super();
 		this.utilisateurRepositroy = utilisateurRepositroy;
 		this.candidatRepositroy = candidatRepositroy;
 		this.employeurRepositroy = employeurRepositroy;
-		this.request = request;
 	}
 
 	@Override

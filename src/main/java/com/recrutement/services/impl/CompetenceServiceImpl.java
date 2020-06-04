@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.recrutement.entity.Competence;
+import com.recrutement.entities.Competence;
 import com.recrutement.repository.CompetenceRepositroy;
 import com.recrutement.services.CompetenceService;
 
@@ -46,6 +46,11 @@ public class CompetenceServiceImpl implements CompetenceService {
 		if (competenceRepositroy.getOne(id) != null)
 			return false;
 		return true;
+	}
+
+	@Override
+	public List<Competence> getByDomaine(Long id) {
+		return competenceRepositroy.getByDomaine(id);
 	}
 
 }

@@ -2,7 +2,7 @@ package com.recrutement.services;
 
 import java.util.List;
 
-import com.recrutement.entity.Offre;
+import com.recrutement.entities.Offre;
 
 public interface OffreService {
 
@@ -10,5 +10,5 @@ public interface OffreService {
 	Offre getOne(Long id);
 	Offre save(Offre offre);
 	boolean delete(Long id);
-	boolean postuler(String id, String login);
+	List<Offre> getByEmploye(Long id);
 }

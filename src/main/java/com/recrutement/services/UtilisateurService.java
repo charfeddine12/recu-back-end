@@ -2,7 +2,7 @@ package com.recrutement.services;
 
 import java.util.List;
 
-import com.recrutement.entity.Utilisateur;
+import com.recrutement.entities.Utilisateur;
 
 public interface UtilisateurService {
 
