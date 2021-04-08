@@ -1,4 +1,4 @@
-package com.recrutement.entity;
+package com.recrutement.entities;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -19,24 +19,22 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Table
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 
-public class Formation implements Serializable {
+public class Poste implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column
 	private Long id;
 	@Column
-	private Date debut;
+	private String intitule;
 	@Column
-	private Date fin;
-	@Column
-	private String titre;
-	@Column
-	private String etablissement;
+	private String description;
+
 	@CreationTimestamp
 	@Column
 	private Date dateAjout;
@@ -44,19 +42,16 @@ public class Formation implements Serializable {
 	@Column
 	private Date dateModif;
 
-	public Formation() {
+	public Poste() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Formation(Long id, Date debut, Date fin, String titre, String etablissement, Date dateAjout,
-			Date dateModif) {
+	public Poste(Long id, String intitule, String description, Date dateAjout, Date dateModif) {
 		super();
 		this.id = id;
-		this.debut = debut;
-		this.fin = fin;
-		this.titre = titre;
-		this.etablissement = etablissement;
+		this.intitule = intitule;
+		this.description = description;
 		this.dateAjout = dateAjout;
 		this.dateModif = dateModif;
 	}
@@ -69,36 +64,20 @@ public class Formation implements Serializable {
 		this.id = id;
 	}
 
-	public Date getDebut() {
-		return debut;
+	public String getIntitule() {
+		return intitule;
 	}
 
-	public void setDebut(Date debut) {
-		this.debut = debut;
+	public void setIntitule(String intitule) {
+		this.intitule = intitule;
 	}
 
-	public Date getFin() {
-		return fin;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setFin(Date fin) {
-		this.fin = fin;
-	}
-
-	public String getTitre() {
-		return titre;
-	}
-
-	public void setTitre(String titre) {
-		this.titre = titre;
-	}
-
-	public String getEtablissement() {
-		return etablissement;
-	}
-
-	public void setEtablissement(String etablissement) {
-		this.etablissement = etablissement;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public Date getDateAjout() {
@@ -119,8 +98,8 @@ public class Formation implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Formation [id=" + id + ", debut=" + debut + ", fin=" + fin + ", titre=" + titre + ", etablissement="
-				+ etablissement + ", dateAjout=" + dateAjout + ", dateModif=" + dateModif + "]";
+		return "Poste [id=" + id + ", intitule=" + intitule + ", description=" + description + ", dateAjout="
+				+ dateAjout + ", dateModif=" + dateModif + "]";
 	}
 
 }

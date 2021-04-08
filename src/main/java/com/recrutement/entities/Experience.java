@@ -1,8 +1,9 @@
-package com.recrutement.entity;
+package com.recrutement.entities;
 
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,23 +19,29 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-
-public class Poste implements Serializable {
+@Cacheable(false)
+public class Experience implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column
 	private Long id;
 	@Column
-	private String intitule;
+	private Date debut;
+	@Column
+	private Date fin;
+	@Column
+	private String titre;
+	@Column
+	private String employeur;
+	@Column
+	private String lieu;
 	@Column
 	private String description;
-
 	@CreationTimestamp
 	@Column
 	private Date dateAjout;
@@ -42,15 +49,20 @@ public class Poste implements Serializable {
 	@Column
 	private Date dateModif;
 
-	public Poste() {
+	public Experience() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Poste(Long id, String intitule, String description, Date dateAjout, Date dateModif) {
+	public Experience(Long id, Date debut, Date fin, String titre, String employeur, String lieu, String description,
+			Date dateAjout, Date dateModif) {
 		super();
 		this.id = id;
-		this.intitule = intitule;
+		this.debut = debut;
+		this.fin = fin;
+		this.titre = titre;
+		this.employeur = employeur;
+		this.lieu = lieu;
 		this.description = description;
 		this.dateAjout = dateAjout;
 		this.dateModif = dateModif;
@@ -64,12 +76,44 @@ public class Poste implements Serializable {
 		this.id = id;
 	}
 
-	public String getIntitule() {
-		return intitule;
+	public Date getDebut() {
+		return debut;
 	}
 
-	public void setIntitule(String intitule) {
-		this.intitule = intitule;
+	public void setDebut(Date debut) {
+		this.debut = debut;
+	}
+
+	public Date getFin() {
+		return fin;
+	}
+
+	public void setFin(Date fin) {
+		this.fin = fin;
+	}
+
+	public String getTitre() {
+		return titre;
+	}
+
+	public void setTitre(String titre) {
+		this.titre = titre;
+	}
+
+	public String getEmployeur() {
+		return employeur;
+	}
+
+	public void setEmployeur(String employeur) {
+		this.employeur = employeur;
+	}
+
+	public String getLieu() {
+		return lieu;
+	}
+
+	public void setLieu(String lieu) {
+		this.lieu = lieu;
 	}
 
 	public String getDescription() {
@@ -98,8 +142,9 @@ public class Poste implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Poste [id=" + id + ", intitule=" + intitule + ", description=" + description + ", dateAjout="
-				+ dateAjout + ", dateModif=" + dateModif + "]";
+		return "Exeperience [id=" + id + ", debut=" + debut + ", fin=" + fin + ", titre=" + titre + ", employeur="
+				+ employeur + ", lieu=" + lieu + ", description=" + description + ", dateAjout=" + dateAjout
+				+ ", dateModif=" + dateModif + "]";
 	}
 
 }

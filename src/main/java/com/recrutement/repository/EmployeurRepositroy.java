@@ -1,14 +1,11 @@
 package com.recrutement.repository;
 
-import java.util.List;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.recrutement.entity.Employeur;
-import com.recrutement.entity.Offre;
+import com.recrutement.entities.Employeur;
 
 @Repository
 public interface EmployeurRepositroy extends JpaRepository<Employeur, Long> {

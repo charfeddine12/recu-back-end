@@ -2,7 +2,7 @@ package com.recrutement.services;
 
 import java.util.List;
 
-import com.recrutement.entity.Formation;
+import com.recrutement.entities.Formation;
 
 public interface FormationService {
 

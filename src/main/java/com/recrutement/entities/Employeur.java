@@ -1,11 +1,10 @@
-package com.recrutement.entity;
+package com.recrutement.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -38,9 +37,8 @@ public class Employeur extends Utilisateur {
 	private String type;
 	@Column
 	private String fondation;
-    @Lob
-	@Column
-	private byte[] photo;
+	@Column(length = 1000000)
+	private String photo;
 	@Column
 	private String pays;
 
@@ -49,7 +47,7 @@ public class Employeur extends Utilisateur {
 	}
 
 	public Employeur(Long id, String nom, String presentation, String site, String adresse, String taille, String type,
-			String fondation, byte[] photo, String pays) {
+			String fondation, String photo, String pays) {
 		super();
 		this.id = id;
 		this.nom = nom;
@@ -127,11 +125,11 @@ public class Employeur extends Utilisateur {
 		this.fondation = fondation;
 	}
 
-	public byte[] getPhoto() {
+	public String getPhoto() {
 		return photo;
 	}
 
-	public void setPhoto(byte[] photo) {
+	public void setPhoto(String photo) {
 		this.photo = photo;
 	}
 

@@ -2,7 +2,7 @@ package com.recrutement.services;
 
 import java.util.List;
 
-import com.recrutement.entity.Poste;
+import com.recrutement.entities.Poste;
 
 public interface PosteService {
 

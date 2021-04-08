@@ -1,4 +1,4 @@
-package com.recrutement.entity;
+package com.recrutement.entities;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -28,11 +28,14 @@ public class Domaine implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column
 	private Long id;
+	
 	@Column
 	private String intitule;
+	
 	@CreationTimestamp
 	@Column
 	private Date dateAjout;
+	
 	@UpdateTimestamp
 	@Column
 	private Date dateModif;

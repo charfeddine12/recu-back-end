@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.recrutement.entity.Langue;
+import com.recrutement.entities.Langue;
 import com.recrutement.services.LangueService;
 
 @RestController

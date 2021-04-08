@@ -1,12 +1,6 @@
 package com.recrutement.controller;
 
-import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,12 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.recrutement.entity.Candidat;
-import com.recrutement.entity.Employeur;
-import com.recrutement.entity.Offre;
+import com.recrutement.entities.Offre;
 import com.recrutement.services.CandidatService;
 import com.recrutement.services.EmployeurService;
 import com.recrutement.services.OffreService;
@@ -78,25 +69,14 @@ public class OffreController {
 	}
 
 	@PostMapping("/save")
-	public Offre createOffre(@RequestBody Offre offre) throws URISyntaxException {
+	public Offre createOffre(@RequestBody Offre offre){
 		log.info("REST request to save Offre : {}", offre);
-
-		if (offre.getId() != null) {
-			log.info("A new Offre cannot already have an ID idexists");
-		} else {
-			offre.setLangues(offre.getLangues());
-
 			Offre newOffre = offreService.save(offre);
-			List<Offre> offres = new ArrayList<Offre>();
-			offres.add(newOffre);
 			return newOffre;
-		}
-		return null;
 	}
 
 	@PutMapping("/update")
 	public Offre updateOffre(@RequestBody Offre offre) {
-		log.info("REST request to update Offre : {}", offre);
 		if (offre.getId() != null)
 			if (offreService.getOne(offre.getId()) != null) {
 
@@ -107,53 +87,8 @@ public class OffreController {
 
 	}
 
-	@PostMapping("/postuler")
-	public Offre postuler(@RequestParam("id") String id, @RequestParam("login") String login)
-			throws URISyntaxException {
-		log.info("REST request candidat with id:{} want postuler in  Offre : {}", login, id);
-
-		if (id != null) {
-			offreService.postuler(id, login);
-		}
-		return null;
-	}
-
 	@GetMapping("/getMyOffres/{id}")
-	public List<Offre> getMyOffres(@PathVariable String id) {
-		log.info("REST request to get Employeur : {}", id);
-		List<Offre> offres = new ArrayList<Offre>();
-		List<Offre> offresFiltred = new ArrayList<>();
-		if (id != null)
-			offres = offreService.getAll();
-		for (Offre offre : offres) {
-			for (Employeur emp : offre.getEmployeur()) {
-				if (emp.getId().equals(Long.valueOf(id))) {
-					offresFiltred.add(offre);
-				}
-			}
-		}
-		log.info("List :{}", offresFiltred.toString());
-
-		return offresFiltred;
+	public List<Offre> getMyOffres(@PathVariable Long id) {
+		return offreService.getByEmploye(id);
 	}
-
-	@GetMapping("/getCandidatures/{id}")
-	public List<Candidat> getCandidatures(@PathVariable String id) {
-		log.info("REST request to get getCandidatures by id offre : {}", id);
-		List<Candidat> candidats = candidatService.getAll();
-		List<Candidat> candidatsFiltred = new ArrayList<>();
-		for (Candidat cand : candidats) {
-			for (Offre offre : cand.getOffres()) {
-				log.info("offre id :{}", offre.getId());
-
-				if (offre.getId().equals(Long.valueOf(id))) {
-					candidatsFiltred.add(cand);
-				}
-			}
-		}
-		log.info("size :{}", candidatsFiltred.size());
-
-		return candidatsFiltred;
-	}
-
 }

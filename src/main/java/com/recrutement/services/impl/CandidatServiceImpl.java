@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.recrutement.entity.Candidat;
+import com.recrutement.entities.Candidat;
 import com.recrutement.repository.CandidatRepositroy;
 import com.recrutement.services.CandidatService;
 
@@ -13,12 +13,8 @@ import com.recrutement.services.CandidatService;
 public class CandidatServiceImpl implements CandidatService {
 
 	@Autowired
-	CandidatRepositroy candidatRepository;
+	private CandidatRepositroy candidatRepository;
 
-	public CandidatServiceImpl(CandidatRepositroy candidatRepository) {
-		super();
-		this.candidatRepository = candidatRepository;
-	}
 
 	@Override
 	public List<Candidat> getAll() {

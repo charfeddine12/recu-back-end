@@ -1,54 +1,70 @@
-package com.recrutement.entity;
+package com.recrutement.entities;
 
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.recrutement.entity.types.Role;
 
 @Entity
 @Table
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-@Cacheable(false)
-public class Competence implements Serializable {
+public class Utilisateur implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column
 	private Long id;
-	private String intitule;
 	@Column
+	@Email
+	private String email;
+	@Column
+	@Enumerated(EnumType.STRING)
+	private Role role;
 	@CreationTimestamp
-	private Date dateAjout;
 	@Column
+	private Date dateAjout;
 	@UpdateTimestamp
+	@Column
 	private Date dateModif;
 
-	public Competence() {
+	@Column
+	private String password;
+
+	public Utilisateur() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Competence(Long id, String intitule, Date dateAjout, Date dateModif) {
+	public Utilisateur(Long id, @Email String email, Role role, Date dateAjout, Date dateModif, String password) {
 		super();
 		this.id = id;
-		this.intitule = intitule;
+		this.email = email;
+		this.role = role;
 		this.dateAjout = dateAjout;
 		this.dateModif = dateModif;
+		this.password = password;
 	}
 
 	public Long getId() {
@@ -59,12 +75,20 @@ public class Competence implements Serializable {
 		this.id = id;
 	}
 
-	public String getIntitule() {
-		return intitule;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setIntitule(String intitule) {
-		this.intitule = intitule;
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
 	}
 
 	public Date getDateAjout() {
@@ -83,10 +107,18 @@ public class Competence implements Serializable {
 		this.dateModif = dateModif;
 	}
 
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	@Override
 	public String toString() {
-		return "Competence [id=" + id + ", intitule=" + intitule + ", dateAjout=" + dateAjout + ", dateModif="
-				+ dateModif + "]";
+		return "Utilisateur [id=" + id + ", email=" + email + ", role=" + role + ", dateAjout=" + dateAjout
+				+ ", dateModif=" + dateModif + ", password=" + password + "]";
 	}
 
 }

@@ -2,7 +2,7 @@ package com.recrutement.services;
 
 import java.util.List;
 
-import com.recrutement.entity.Competence;
+import com.recrutement.entities.Competence;
 
 public interface CompetenceService {
 
@@ -10,4 +10,5 @@ public interface CompetenceService {
 	Competence getOne(Long id);
 	Competence save(Competence comptence);
 	boolean delete(Long id);
+	List<Competence> getByDomaine(Long id);
 }

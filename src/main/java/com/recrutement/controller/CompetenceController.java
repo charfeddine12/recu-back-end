@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.recrutement.entity.Competence;
+import com.recrutement.entities.Competence;
 import com.recrutement.services.CompetenceService;
 
 @RestController
@@ -82,5 +82,10 @@ public class CompetenceController {
 			}
 		return null;
 
+	}
+	
+	@GetMapping("/getByDomaine/{id}")
+	public List<Competence> getAllByDomaine(@PathVariable Long id) {
+		return competenceService.getByDomaine(id);
 	}
 }

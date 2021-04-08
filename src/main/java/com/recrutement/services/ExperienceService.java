@@ -2,7 +2,7 @@ package com.recrutement.services;
 
 import java.util.List;
 
-import com.recrutement.entity.Experience;
+import com.recrutement.entities.Experience;
 
 public interface ExperienceService {
 

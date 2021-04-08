@@ -2,7 +2,7 @@ package com.recrutement.services;
 
 import java.util.List;
 
-import com.recrutement.entity.Domaine;
+import com.recrutement.entities.Domaine;
 
 public interface DomaineService {
 

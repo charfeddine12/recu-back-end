@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.recrutement.entity.Candidat;
+import com.recrutement.entities.Candidat;
 
 @Repository
 public interface CandidatRepositroy extends JpaRepository<Candidat, Long> {
@@ -19,6 +19,8 @@ public interface CandidatRepositroy extends JpaRepository<Candidat, Long> {
 	
 	@Query("select candidat from Candidat candidat where candidat.id IN (:listCandidatsIds)")
 	public List<Candidat> getCandidatsByIds(@Param("listCandidatsIds") List<Long> listCandidatsIds);
+	
+	
 
 	
 }

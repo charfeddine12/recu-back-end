@@ -2,8 +2,7 @@ package com.recrutement.services;
 
 import java.util.List;
 
-import com.recrutement.entity.Employeur;
-import com.recrutement.entity.Offre;
+import com.recrutement.entities.Employeur;
 
 public interface EmployeurService {
 

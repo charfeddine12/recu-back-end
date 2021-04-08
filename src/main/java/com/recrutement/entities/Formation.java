@@ -1,4 +1,4 @@
-package com.recrutement.entity;
+package com.recrutement.entities;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -8,10 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.Table;
-import javax.validation.constraints.Email;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -20,10 +17,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 
-public class Utilisateur implements Serializable {
+public class Formation implements Serializable {
 
 	/**
 	 * 
@@ -34,10 +30,13 @@ public class Utilisateur implements Serializable {
 	@Column
 	private Long id;
 	@Column
-	@Email
-	private String email;
+	private Date debut;
 	@Column
-	private String role;
+	private Date fin;
+	@Column
+	private String titre;
+	@Column
+	private String etablissement;
 	@CreationTimestamp
 	@Column
 	private Date dateAjout;
@@ -45,22 +44,21 @@ public class Utilisateur implements Serializable {
 	@Column
 	private Date dateModif;
 
-	@Column
-	private String password;
-
-	public Utilisateur() {
+	public Formation() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Utilisateur(Long id, @Email String email, String role, Date dateAjout, Date dateModif, String password) {
+	public Formation(Long id, Date debut, Date fin, String titre, String etablissement, Date dateAjout,
+			Date dateModif) {
 		super();
 		this.id = id;
-		this.email = email;
-		this.role = role;
+		this.debut = debut;
+		this.fin = fin;
+		this.titre = titre;
+		this.etablissement = etablissement;
 		this.dateAjout = dateAjout;
 		this.dateModif = dateModif;
-		this.password = password;
 	}
 
 	public Long getId() {
@@ -71,20 +69,36 @@ public class Utilisateur implements Serializable {
 		this.id = id;
 	}
 
-	public String getEmail() {
-		return email;
+	public Date getDebut() {
+		return debut;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setDebut(Date debut) {
+		this.debut = debut;
 	}
 
-	public String getRole() {
-		return role;
+	public Date getFin() {
+		return fin;
 	}
 
-	public void setRole(String role) {
-		this.role = role;
+	public void setFin(Date fin) {
+		this.fin = fin;
+	}
+
+	public String getTitre() {
+		return titre;
+	}
+
+	public void setTitre(String titre) {
+		this.titre = titre;
+	}
+
+	public String getEtablissement() {
+		return etablissement;
+	}
+
+	public void setEtablissement(String etablissement) {
+		this.etablissement = etablissement;
 	}
 
 	public Date getDateAjout() {
@@ -103,18 +117,10 @@ public class Utilisateur implements Serializable {
 		this.dateModif = dateModif;
 	}
 
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
 	@Override
 	public String toString() {
-		return "Utilisateur [id=" + id + ", email=" + email + ", role=" + role + ", dateAjout=" + dateAjout
-				+ ", dateModif=" + dateModif + ", password=" + password + "]";
+		return "Formation [id=" + id + ", debut=" + debut + ", fin=" + fin + ", titre=" + titre + ", etablissement="
+				+ etablissement + ", dateAjout=" + dateAjout + ", dateModif=" + dateModif + "]";
 	}
 
 }
